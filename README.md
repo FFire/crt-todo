@@ -1,7 +1,7 @@
 ### ❤️ First to do app ✅
 
-[![ESLinter](https://github.com/FFire/cra-todo/actions/workflows/ESLinter.yml/badge.svg?branch=main)](https://github.com/FFire/cra-todo/actions/workflows/ESLinter.yml)
-[![Maintainability](https://api.codeclimate.com/v1/badges/80e0e39cb0d8b37fa44b/maintainability)](https://codeclimate.com/github/FFire/cra-todo/maintainability)
+[![ESLinter](https://github.com/FFire/crt-todo/actions/workflows/ESLinter.yml/badge.svg)](https://github.com/FFire/crt-todo/actions/workflows/ESLinter.yml)
+[![Maintainability](https://api.codeclimate.com/v1/badges/2fedef06da5579404408/maintainability)](https://codeclimate.com/github/FFire/crt-todo/maintainability)
 
 ### 🙋‍♂ Alexandr Belan <img src="https://4.bp.blogspot.com/-IUDvPAuE9Rg/XE9Muo_8D-I/AAAAAAAAHdE/vDGQsIXh4GM8qdInx9AHPq984Q9P4BEQgCK4BGAYYCw/s640/Icon-Telegram.png" alt="drawing" width="24"/>️ [overstar](https://t.me/overstar)
 ### CRA TO DO
