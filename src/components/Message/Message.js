@@ -1,6 +1,6 @@
 import classNames from 'classnames';
-import React from "react";
-import s from "./Message.module.css";
+import React from 'react';
+import s from './Message.module.css';
 
 export class Message extends React.Component {
 

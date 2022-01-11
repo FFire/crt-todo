@@ -1,6 +1,6 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import { TaskItem } from './TaskItem/TaskItem';
-import s from "./TaskList.module.css";
+import s from './TaskList.module.css';
 
 export class TaskList extends Component {
 

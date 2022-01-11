@@ -64,8 +64,6 @@ export default class App extends Component {
   };
 
   handleDeleteCompleted = (e) => {
-    e.preventDefault();
-
     this.setState((state) => {
       const tasks = state.tasks.filter(({ isDone }) => !isDone)
       return { tasks, stateFilter: 'All' }

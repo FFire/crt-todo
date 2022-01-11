@@ -27,14 +27,14 @@ li {
 
 li div div {
   word-break: break-all;
-  padding: 10px 60px 10px 60px;
+  padding: 10px 60px;
   display: block;
   line-height: 1.2;
   transition: color 0.4s;
   overflow-wrap: break-word;
 }
 
-.toggle{
+.toggle {
   text-align: center;
   background: none;
   width: 40px;

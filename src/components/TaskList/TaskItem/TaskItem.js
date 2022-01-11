@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import s from "./TaskItem.module.css";
+import React, { Component } from 'react';
+import s from './TaskItem.module.css';
 
 export class TaskItem extends Component {
 
@@ -9,7 +9,7 @@ export class TaskItem extends Component {
       <li>
         <div>
           <input
-            type="checkbox"
+            type='checkbox'
             id={id}
             defaultChecked={isDone}
             onChange={this.props.handleToggle}
@@ -21,7 +21,7 @@ export class TaskItem extends Component {
           >{text}</div>
 
           <input
-            type="button"
+            type='button'
             id={id}
             value='×'
             className={s.destroy}
