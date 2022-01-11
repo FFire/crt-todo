@@ -66,7 +66,7 @@ export default class App extends Component {
   handleDeleteCompleted = (e) => {
     this.setState((state) => {
       const tasks = state.tasks.filter(({ isDone }) => !isDone);
-      return { tasks, stateFilter: 'All' };
+      return { tasks, stateFilter: stateFilterNames.all, pendingTask: '' };
     });
 
     this.setInfo();
@@ -79,7 +79,7 @@ export default class App extends Component {
 
     this.setState((state) => {
       const tasks = state.tasks.filter(({ id }) => id !== parseInt(targetId, 10));
-      return { tasks };
+      return { tasks, pendingTask: '' };
     });
 
     this.setInfo();
