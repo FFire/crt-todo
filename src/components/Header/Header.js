@@ -1,3 +1,4 @@
+/* eslint class-methods-use-this: "off" */
 import React, { Component } from 'react';
 import s from './Header.module.css';
 

@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import s from './TaskItem.module.css';
 
 export class TaskItem extends Component {
-
   render() {
     const { id, text, isDone } = this.props.task;
     const itemClass = classNames(s.item, { [s.done]: isDone });
@@ -29,6 +28,6 @@ export class TaskItem extends Component {
           onClick={this.props.handleDeleteById}
         />
       </li>
-    )
+    );
   }
 }

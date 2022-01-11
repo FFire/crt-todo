@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import s from './Filter.module.css';
 
 export class Filter extends Component {
-
   render() {
-    const { stateFilterNames, stateFilter, textFilter, handleStateFilter } = this.props;
+    const {
+      stateFilterNames, stateFilter, textFilter, handleStateFilter,
+    } = this.props;
     const filterList = stateFilterNames.map((filterName) => (
       <span key={filterName}>
         <input type='radio' id={`filter-${filterName}`}
@@ -35,6 +36,6 @@ export class Filter extends Component {
           onClick={this.props.handleDeleteCompleted}
         >Delete completed</button>
       </div>
-    )
+    );
   }
 }

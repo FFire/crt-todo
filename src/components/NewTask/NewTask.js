@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import s from './NewTask.module.css';
 
 export class NewTask extends Component {
-
   render() {
     return (
       <input

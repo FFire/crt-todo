@@ -1,10 +1,10 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import * as yup from 'yup';
-import { Filter } from "../Filter/Filter";
-import { Header } from "../Header/Header";
-import { Message } from "../Message/Message";
-import { NewTask } from "../NewTask/NewTask";
-import { TaskList } from "../TaskList/TaskList";
+import { Filter } from '../Filter/Filter';
+import { Header } from '../Header/Header';
+import { Message } from '../Message/Message';
+import { NewTask } from '../NewTask/NewTask';
+import { TaskList } from '../TaskList/TaskList';
 import './App.css';
 import { initialTasks } from './initialTasks';
 
@@ -12,16 +12,16 @@ const messageMode = {
   none: 'none',
   info: 'info',
   error: 'error',
-}
+};
 const stateFilterNames = {
   all: 'All',
   active: 'Active',
   completed: 'Completed',
-}
+};
 
 export default class App extends Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
       tasks: [],
@@ -33,7 +33,7 @@ export default class App extends Component {
       },
       pendingTask: '',
     };
-  };
+  }
 
   componentDidMount = () => {
     this.setState(() => ({ tasks: initialTasks }));
@@ -54,10 +54,10 @@ export default class App extends Component {
     const { id: targetId, checked: targetIsDone } = e.target;
 
     this.setState((state) => {
-      const tasks = state.tasks.map((task) => (task.id === parseInt(targetId)
+      const tasks = state.tasks.map((task) => (task.id === parseInt(targetId, 10)
         ? { ...task, isDone: targetIsDone }
         : task));
-      return { tasks }
+      return { tasks };
     });
 
     this.setInfo();
@@ -65,8 +65,8 @@ export default class App extends Component {
 
   handleDeleteCompleted = (e) => {
     this.setState((state) => {
-      const tasks = state.tasks.filter(({ isDone }) => !isDone)
-      return { tasks, stateFilter: 'All' }
+      const tasks = state.tasks.filter(({ isDone }) => !isDone);
+      return { tasks, stateFilter: 'All' };
     });
 
     this.setInfo();
@@ -78,8 +78,8 @@ export default class App extends Component {
     const { id: targetId } = e.target;
 
     this.setState((state) => {
-      const tasks = state.tasks.filter(({ id }) => id !== parseInt(targetId))
-      return { tasks }
+      const tasks = state.tasks.filter(({ id }) => id !== parseInt(targetId, 10));
+      return { tasks };
     });
 
     this.setInfo();
@@ -102,7 +102,7 @@ export default class App extends Component {
     const { value: text } = e.target;
 
     if ((e.code === 'Enter') && this.validate(text)) {
-      const id = Math.max(...this.state.tasks.map(({ id }) => id)) + 1;
+      const id = Math.max(...this.state.tasks.map((task) => task.id)) + 1;
       const isDone = false;
       const newTask = { id, text, isDone };
       this.setState((state) => (
@@ -118,18 +118,18 @@ export default class App extends Component {
   handleTextFilter = (e) => {
     const { value: textFilter } = e.target;
 
-    this.setState(() => ({ textFilter }))
+    this.setState(() => ({ textFilter }));
   };
 
   handleStateFilter = (e) => {
     const { value: stateFilter } = e.target;
 
-    this.setState(() => ({ stateFilter }))
+    this.setState(() => ({ stateFilter }));
   };
 
   validate(pendingTask) {
     const tasks = this.state.tasks.map(({ text }) => text.toLowerCase());
-    const addingInfo = 'To add task press ENTER at the end'
+    const addingInfo = 'To add task press ENTER at the end';
 
     try {
       yup.string()
@@ -143,29 +143,27 @@ export default class App extends Component {
       this.setState(() => ({ message: { text: err.message, mode: messageMode.error } }));
       return false;
     }
-  };
+  }
 
-  getFilteredTasks = (tasks, textFilter, stateFilter) => {
-    return tasks
-      .filter(({ text }) => text.toLowerCase().includes(textFilter.toLowerCase()))
-      .filter(({ isDone }) => {
-        switch (stateFilter) {
-          case stateFilterNames.all:
-            return true;
+  getFilteredTasks = (tasks, textFilter, stateFilter) => tasks
+    .filter(({ text }) => text.toLowerCase().includes(textFilter.toLowerCase()))
+    .filter(({ isDone }) => {
+      switch (stateFilter) {
+        case stateFilterNames.all:
+          return true;
 
-          case stateFilterNames.active:
-            return !isDone;
+        case stateFilterNames.active:
+          return !isDone;
 
-          case stateFilterNames.completed:
-            return isDone;
+        case stateFilterNames.completed:
+          return isDone;
 
-          default:
-            this.setState(() => ({ stateFilter: stateFilterNames.all }));
-        };
+        default:
+          this.setState(() => ({ stateFilter: stateFilterNames.all }));
+      }
 
-        return true;
-      });
-  };
+      return true;
+    });
 
   render() {
     return (
@@ -199,6 +197,6 @@ export default class App extends Component {
           handleToggle={this.handleToggle}
         />
       </>
-    )
+    );
   }
 }
