@@ -1,13 +1,3 @@
-.App-header {
-  background-color: #282c34;
-  min-height: 10vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
 section {
   display: block;
 }
@@ -16,9 +6,5 @@ section {
   margin: 130px 0 40px 0;
   position: relative;
   box-shadow: 0 2px 4px 0 rgb(0 0 0 / 20%), 0 25px 50px 0 rgb(0 0 0 / 10%);
-}
-
-.App-link {
-  color: #61dafb;
 }
 
