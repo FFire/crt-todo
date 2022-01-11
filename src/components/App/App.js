@@ -128,7 +128,7 @@ export default class App extends Component {
   };
 
   validate(pendingTask) {
-    const tasks = this.state.tasks.map(({ text }) => text);
+    const tasks = this.state.tasks.map(({ text }) => text.toLowerCase());
     const addingInfo = 'To add task press ENTER at the end'
 
     try {
@@ -136,7 +136,7 @@ export default class App extends Component {
         .required('Task is required')
         .min(5, 'Task must be minimum 5 letters')
         .notOneOf(tasks, 'Task already exist')
-        .validateSync(pendingTask);
+        .validateSync(pendingTask.toLowerCase());
       this.setState(() => ({ message: { text: addingInfo, mode: messageMode.info } }));
       return true;
     } catch (err) {
@@ -161,7 +161,9 @@ export default class App extends Component {
 
           default:
             this.setState(() => ({ stateFilter: stateFilterNames.all }));
-        }
+        };
+
+        return true;
       });
   };
 

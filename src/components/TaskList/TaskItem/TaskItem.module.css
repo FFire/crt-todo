@@ -25,7 +25,7 @@ li {
   border-bottom: 1px solid #ededed;
 }
 
-li div div {
+.item {
   word-break: break-all;
   padding: 10px 60px;
   display: block;
