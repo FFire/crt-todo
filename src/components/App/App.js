@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import * as yup from 'yup';
-import { Filter } from '../Filter/Filter';
-import { Header } from '../Header/Header';
-import { Message } from '../Message/Message';
-import { NewTask } from '../NewTask/NewTask';
-import { TaskList } from '../TaskList/TaskList';
+import {
+  Filter, Header, Message, NewTask, TaskList,
+} from '../components';
 import './App.css';
 import { initialTasks } from './initialTasks';
 
