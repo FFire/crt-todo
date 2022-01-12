@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import * as yup from 'yup';
 import {
-  Filter, Header, Message, NewTask, TaskList,
+  Filter, Header, Message, NewTask, TaskList, ThemeToggle,
 } from '../components';
 import './App.css';
 import { initialTasks } from './initialTasks';
 
+const ThemeContext = React.createContext('light');
 const messageMode = {
   none: 'none',
   info: 'info',
@@ -167,7 +168,7 @@ export default class App extends Component {
     return (
       <>
         <Header />
-
+        <ThemeToggle />
         <NewTask
           handleKeyPress={this.handleKeyPress}
           handleGetFocus={this.handleGetFocus}
