@@ -1,0 +1,51 @@
+.destroy {
+  position: absolute;
+  top: 0;
+  right: 10px;
+  bottom: 0;
+  width: 40px;
+  height: 40px;
+  margin: auto 0;
+  font-size: 30px;
+  color: transparent;
+  transition: color 0.2s ease-out;
+  background-color: transparent;
+  border: transparent;
+}
+
+.destroy:hover {
+  color: #cc9a9a;
+}
+
+li {
+  position: relative;
+  margin-left: 10px;
+  font-size: 18px;
+  font-weight: 400;
+  border-bottom: 1px solid #ededed;
+}
+
+.item {
+  word-break: break-all;
+  padding: 10px 60px;
+  display: block;
+  line-height: 1.2;
+  transition: color 0.4s;
+  overflow-wrap: break-word;
+}
+
+.toggle {
+  text-align: center;
+  background: none;
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto 0;
+  border: none;
+}
+
+.done {
+  color: lightgray;
+}
