@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import * as yup from 'yup';
-import {
-  Filter, Header, Message, NewTask, TaskList,
-} from '../components';
+import { Filter, Header, Message, NewTask, TaskList } from '../components';
 import './App.css';
 import { initialTasks } from './initialTasks';
 
