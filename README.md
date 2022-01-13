@@ -5,6 +5,13 @@
 
 ### 🙋‍♂ Alexandr Belan <img src="https://4.bp.blogspot.com/-IUDvPAuE9Rg/XE9Muo_8D-I/AAAAAAAAHdE/vDGQsIXh4GM8qdInx9AHPq984Q9P4BEQgCK4BGAYYCw/s640/Icon-Telegram.png" alt="drawing" width="24"/>️ [overstar](https://t.me/overstar)
 ### CRA TO DO
+
+Ветка TASK-2
+
+Задача: реализовать возможность включения темной темы за счет использования контекста.
+![image](https://user-images.githubusercontent.com/803639/149396266-06bfa492-e241-4600-a2db-d621950d19b4.png)
+
+
 Try online [version](https://cra-todo.vercel.app/)
 
 It has some features:

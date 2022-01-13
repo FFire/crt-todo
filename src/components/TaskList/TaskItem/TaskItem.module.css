@@ -34,6 +34,11 @@ li {
   overflow-wrap: break-word;
 }
 
+.dark {
+  color: lemonchiffon;
+  background-color: black;
+}
+
 .toggle {
   text-align: center;
   background: none;
@@ -44,6 +49,7 @@ li {
   bottom: 0;
   margin: auto 0;
   border: none;
+  cursor: pointer;
 }
 
 .done {

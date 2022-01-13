@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import * as yup from 'yup';
 import {
-  Filter, Header, Message, NewTask, TaskList, ThemeToggle,
+  Filter, Header, Message, NewTask, TaskList, ThemeToggle
 } from '../components';
 import './App.css';
 import { initialTasks } from './initialTasks';
+import { ThemeContext, themes } from './themeContext';
 
-const ThemeContext = React.createContext('light');
 const messageMode = {
   none: 'none',
   info: 'info',
@@ -31,6 +31,7 @@ export default class App extends Component {
         mode: messageMode.info,
       },
       pendingTask: '',
+      uiTheme: themes.dark,
     };
   }
 
@@ -164,11 +165,26 @@ export default class App extends Component {
       return true;
     });
 
+    handleThemeToggle = (e) => {
+      const { checked } = e.target;
+
+      this.setState(() => ({
+        uiTheme: checked ? themes.dark : themes.light,
+        pendingTask: '',
+      }));
+
+      this.setInfo();
+    };
+
   render() {
     return (
-      <>
+
+      <ThemeContext.Provider value={this.state.uiTheme}>
         <Header />
-        <ThemeToggle />
+        <ThemeToggle
+          handleThemeToggle={this.handleThemeToggle}
+          uiTheme={this.state.uiTheme}
+        />
         <NewTask
           handleKeyPress={this.handleKeyPress}
           handleGetFocus={this.handleGetFocus}
@@ -195,7 +211,7 @@ export default class App extends Component {
           handleDeleteById={this.handleDeleteById}
           handleToggle={this.handleToggle}
         />
-      </>
+      </ThemeContext.Provider>
     );
   }
 }
