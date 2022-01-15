@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import * as yup from 'yup';
 import {
-  Filter, Header, Message, NewTask, TaskList, ThemeToggle
+  Filter, Header, Message, NewTask, TaskList, ThemeToggle,
 } from '../components';
 import './App.css';
 import { initialTasks } from './initialTasks';
 import { ThemeContext, themes } from './themeContext';
+import { WithSpinner } from './WithSpinner';
 
+const TaskListWithSpinner = WithSpinner(TaskList);
 const messageMode = {
   none: 'none',
   info: 'info',
@@ -32,11 +34,15 @@ export default class App extends Component {
       },
       pendingTask: '',
       uiTheme: themes.dark,
+      isLoading: true,
     };
   }
 
   componentDidMount = () => {
-    this.setState(() => ({ tasks: initialTasks }));
+    setTimeout(
+      () => this.setState({ tasks: initialTasks, isLoading: false }),
+      1000,
+    );
   };
 
   setInfo = () => {
@@ -165,16 +171,16 @@ export default class App extends Component {
       return true;
     });
 
-    handleThemeToggle = (e) => {
-      const { checked } = e.target;
+  handleThemeToggle = (e) => {
+    const { checked } = e.target;
 
-      this.setState(() => ({
-        uiTheme: checked ? themes.dark : themes.light,
-        pendingTask: '',
-      }));
+    this.setState(() => ({
+      uiTheme: checked ? themes.dark : themes.light,
+      pendingTask: '',
+    }));
 
-      this.setInfo();
-    };
+    this.setInfo();
+  };
 
   render() {
     return (
@@ -192,7 +198,6 @@ export default class App extends Component {
           handleChange={this.handleChange}
           pendingTask={this.state.pendingTask}
         />
-
         <Message
           message={this.state.message}
         />
@@ -206,7 +211,8 @@ export default class App extends Component {
           handleDeleteCompleted={this.handleDeleteCompleted}
         />
 
-        <TaskList
+        <TaskListWithSpinner
+          isLoading={this.state.isLoading}
           tasks={this.getFilteredTasks(this.state.tasks, this.state.textFilter, this.state.stateFilter)}
           handleDeleteById={this.handleDeleteById}
           handleToggle={this.handleToggle}

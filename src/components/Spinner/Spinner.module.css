@@ -1,0 +1,13 @@
+.spinner {
+  text-align: center;
+  font-size: xx-large;
+  padding: 60px;
+  color: gray;
+  border: black;
+  border-width: 2px;
+}
+
+.dark {
+  color: lemonchiffon;
+  background-color: black;
+}
