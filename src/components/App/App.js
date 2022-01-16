@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import * as yup from 'yup';
 import {
-  Filter, Header, Message, NewTask, TaskList,
+  Filter, Header, Message, NewTask, TaskList, ThemeToggle,
 } from '../components';
 import './App.css';
 import { initialTasks } from './initialTasks';
+import { theme, ThemeContext } from './themeContext';
 
 const messageMode = {
   none: 'none',
@@ -30,6 +31,7 @@ export default class App extends Component {
         mode: messageMode.info,
       },
       pendingTask: '',
+      uiTheme: theme.DARK,
     };
   }
 
@@ -163,17 +165,35 @@ export default class App extends Component {
       return true;
     });
 
-  render() {
-    return (
-      <>
-        <Header />
+  handleThemeToggle = (e) => {
+    const { checked } = e.target;
 
+    this.setState(() => ({
+      uiTheme: checked ? theme.DARK : theme.LIGHT,
+      pendingTask: '',
+    }));
+
+    this.setInfo();
+  };
+
+  render() {
+    const {
+      pendingTask, uiTheme, stateFilter, textFilter, tasks: stateTasks,
+    } = this.state;
+
+    return (
+      <ThemeContext.Provider value={uiTheme}>
+        <Header />
+        <ThemeToggle
+          handleThemeToggle={this.handleThemeToggle}
+          uiTheme={uiTheme}
+        />
         <NewTask
           handleKeyPress={this.handleKeyPress}
           handleGetFocus={this.handleGetFocus}
           handleLostFocus={this.setInfo}
           handleChange={this.handleChange}
-          pendingTask={this.state.pendingTask}
+          pendingTask={pendingTask}
         />
 
         <Message
@@ -182,19 +202,19 @@ export default class App extends Component {
 
         <Filter
           stateFilterNames={Object.values(stateFilterNames)}
-          stateFilter={this.state.stateFilter}
-          textFilter={this.state.textFilter}
+          stateFilter={stateFilter}
+          textFilter={textFilter}
           handleTextFilter={this.handleTextFilter}
           handleStateFilter={this.handleStateFilter}
           handleDeleteCompleted={this.handleDeleteCompleted}
         />
 
         <TaskList
-          tasks={this.getFilteredTasks(this.state.tasks, this.state.textFilter, this.state.stateFilter)}
+          tasks={this.getFilteredTasks(stateTasks, textFilter, stateFilter)}
           handleDeleteById={this.handleDeleteById}
           handleToggle={this.handleToggle}
         />
-      </>
+      </ThemeContext.Provider>
     );
   }
 }
