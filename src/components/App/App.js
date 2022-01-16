@@ -6,7 +6,9 @@ import {
 import './App.css';
 import { initialTasks } from './initialTasks';
 import { theme, ThemeContext } from './themeContext';
+import { WithSpinner } from './WithSpinner';
 
+const TaskListWithSpinner = WithSpinner(TaskList);
 const messageMode = {
   none: 'none',
   info: 'info',
@@ -31,12 +33,16 @@ export default class App extends Component {
         mode: messageMode.info,
       },
       pendingTask: '',
+      isLoading: true,
       uiTheme: theme.DARK,
     };
   }
 
   componentDidMount = () => {
-    this.setState(() => ({ tasks: initialTasks }));
+    setTimeout(
+      () => this.setState({ tasks: initialTasks, isLoading: false }),
+      1000,
+    );
   };
 
   setInfo = () => {
@@ -195,7 +201,6 @@ export default class App extends Component {
           handleChange={this.handleChange}
           pendingTask={pendingTask}
         />
-
         <Message
           message={this.state.message}
         />
@@ -209,7 +214,8 @@ export default class App extends Component {
           handleDeleteCompleted={this.handleDeleteCompleted}
         />
 
-        <TaskList
+        <TaskListWithSpinner
+          isLoading={this.state.isLoading}
           tasks={this.getFilteredTasks(stateTasks, textFilter, stateFilter)}
           handleDeleteById={this.handleDeleteById}
           handleToggle={this.handleToggle}
