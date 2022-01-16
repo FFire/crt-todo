@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import * as yup from 'yup';
+import '../../styles/output.css';
 import {
   Filter, Header, Message, NewTask, TaskList, ThemeToggle,
 } from '../components';
