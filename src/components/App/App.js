@@ -178,8 +178,8 @@ export default class App extends Component {
 
   render() {
     const {
-      pendingTask, uiTheme, stateFilter, textFilter, tasks,
-    } = this.state.pendingTask;
+      pendingTask, uiTheme, stateFilter, textFilter, tasks: stateTasks,
+    } = this.state;
 
     return (
       <ThemeContext.Provider value={uiTheme}>
@@ -210,7 +210,7 @@ export default class App extends Component {
         />
 
         <TaskList
-          tasks={this.getFilteredTasks(tasks, textFilter, stateFilter)}
+          tasks={this.getFilteredTasks(stateTasks, textFilter, stateFilter)}
           handleDeleteById={this.handleDeleteById}
           handleToggle={this.handleToggle}
         />
