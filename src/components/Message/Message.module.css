@@ -1,14 +1,15 @@
-.error {
+div {
   padding: 5px 10px;
+}
+
+.error {
   color: red;
 }
 
 .info {
-  padding: 5px 10px;
   color: darkgreen;
 }
 
 .none {
-  padding: 5px 10px;
   color: transparent;
 }
