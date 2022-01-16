@@ -5,7 +5,7 @@ import {
 } from '../components';
 import './App.css';
 import { initialTasks } from './initialTasks';
-import { ThemeContext, themes } from './themeContext';
+import { theme, ThemeContext } from './themeContext';
 import { WithSpinner } from './WithSpinner';
 
 const TaskListWithSpinner = WithSpinner(TaskList);
@@ -33,8 +33,8 @@ export default class App extends Component {
         mode: messageMode.info,
       },
       pendingTask: '',
-      uiTheme: themes.dark,
       isLoading: true,
+      uiTheme: theme.DARK,
     };
   }
 
@@ -175,7 +175,7 @@ export default class App extends Component {
     const { checked } = e.target;
 
     this.setState(() => ({
-      uiTheme: checked ? themes.dark : themes.light,
+      uiTheme: checked ? theme.DARK : theme.LIGHT,
       pendingTask: '',
     }));
 
@@ -183,20 +183,23 @@ export default class App extends Component {
   };
 
   render() {
-    return (
+    const {
+      pendingTask, uiTheme, stateFilter, textFilter, tasks: stateTasks,
+    } = this.state;
 
-      <ThemeContext.Provider value={this.state.uiTheme}>
+    return (
+      <ThemeContext.Provider value={uiTheme}>
         <Header />
         <ThemeToggle
           handleThemeToggle={this.handleThemeToggle}
-          uiTheme={this.state.uiTheme}
+          uiTheme={uiTheme}
         />
         <NewTask
           handleKeyPress={this.handleKeyPress}
           handleGetFocus={this.handleGetFocus}
           handleLostFocus={this.setInfo}
           handleChange={this.handleChange}
-          pendingTask={this.state.pendingTask}
+          pendingTask={pendingTask}
         />
         <Message
           message={this.state.message}
@@ -204,8 +207,8 @@ export default class App extends Component {
 
         <Filter
           stateFilterNames={Object.values(stateFilterNames)}
-          stateFilter={this.state.stateFilter}
-          textFilter={this.state.textFilter}
+          stateFilter={stateFilter}
+          textFilter={textFilter}
           handleTextFilter={this.handleTextFilter}
           handleStateFilter={this.handleStateFilter}
           handleDeleteCompleted={this.handleDeleteCompleted}
@@ -213,7 +216,7 @@ export default class App extends Component {
 
         <TaskListWithSpinner
           isLoading={this.state.isLoading}
-          tasks={this.getFilteredTasks(this.state.tasks, this.state.textFilter, this.state.stateFilter)}
+          tasks={this.getFilteredTasks(stateTasks, textFilter, stateFilter)}
           handleDeleteById={this.handleDeleteById}
           handleToggle={this.handleToggle}
         />
