@@ -1,10 +1,11 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import s from './Filter.module.css';
 
 export class Filter extends Component {
   render() {
     const {
-      stateFilterNames, stateFilter, textFilter, handleStateFilter,
+      stateFilterNames, stateFilter, textFilter, handleStateFilter, handleTextFilter, handleDeleteCompleted,
     } = this.props;
     const filterList = stateFilterNames.map((filterName) => (
       <span key={filterName}>
@@ -22,7 +23,7 @@ export class Filter extends Component {
           <input
             name='text'
             value={textFilter}
-            onChange={this.props.handleTextFilter}
+            onChange={handleTextFilter}
             autoComplete='off'
             placeholder='Filter tasks'
           />
@@ -33,9 +34,18 @@ export class Filter extends Component {
         <button
           type='button'
           className={s.button}
-          onClick={this.props.handleDeleteCompleted}
+          onClick={handleDeleteCompleted}
         >Delete completed</button>
       </div>
     );
   }
 }
+
+Filter.propTypes = {
+  textFilter: PropTypes.string.isRequired,
+  stateFilterNames: PropTypes.arrayOf(PropTypes.string).isRequired,
+  stateFilter: PropTypes.string.isRequired,
+  handleStateFilter: PropTypes.func.isRequired,
+  handleTextFilter: PropTypes.func.isRequired,
+  handleDeleteCompleted: PropTypes.func.isRequired,
+};

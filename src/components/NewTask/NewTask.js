@@ -1,8 +1,12 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import s from './NewTask.module.css';
 
 export class NewTask extends Component {
   render() {
+    const {
+      handleKeyPress, handleChange, handleGetFocus, handleLostFocus, pendingTask,
+    } = this.props;
     return (
       <input
         className={s.newTodo}
@@ -10,12 +14,20 @@ export class NewTask extends Component {
         autoFocus='autofocus'
         autoComplete='off'
         placeholder='Add some tasks'
-        onKeyPress={this.props.handleKeyPress}
-        onChange={this.props.handleChange}
-        onFocus={this.props.handleGetFocus}
-        onBlur={this.props.handleLostFocus}
-        value={this.props.pendingTask}
+        onKeyPress={handleKeyPress}
+        onChange={handleChange}
+        onFocus={handleGetFocus}
+        onBlur={handleLostFocus}
+        value={pendingTask}
       />
     );
   }
 }
+
+NewTask.protoType = {
+  handleKeyPress: PropTypes.func.isRequired,
+  handleChange: PropTypes.func.isRequired,
+  handleGetFocus: PropTypes.func.isRequired,
+  handleLostFocus: PropTypes.func.isRequired,
+  pendingTask: PropTypes.string.isRequired,
+};

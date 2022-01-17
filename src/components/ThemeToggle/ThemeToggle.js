@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import { theme } from '../App/themeContext';
 
@@ -18,3 +19,8 @@ export class ThemeToggle extends React.Component {
     );
   }
 }
+
+ThemeToggle.propTypes = {
+  handleThemeToggle: PropTypes.func.isRequired,
+  UiTheme: PropTypes.string.isRequired,
+};

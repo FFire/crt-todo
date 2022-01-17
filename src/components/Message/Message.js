@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import PropTypes from 'prop-types';
 import React from 'react';
 import s from './Message.module.css';
 
@@ -15,3 +16,10 @@ export class Message extends React.Component {
     );
   }
 }
+
+Message.protoType = {
+  message: PropTypes.shape({
+    text: PropTypes.string.isRequired,
+    mode: PropTypes.string.isRequired,
+  }),
+};

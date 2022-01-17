@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import PropTypes from 'prop-types';
 import React from 'react';
 import { theme, ThemeContext } from '../App/themeContext';
 import s from './Spinner.module.css';
@@ -16,3 +17,7 @@ export class Spinner extends React.Component {
     );
   }
 }
+
+Spinner.protoTypes = {
+  UiTheme: PropTypes.string.isRequired,
+};
