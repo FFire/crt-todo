@@ -5,8 +5,8 @@ import '../../styles/output.css';
 export class Header extends Component {
   render() {
     return (
-      <header className='p-10 text-slate-500 font-medium bg-red-300'>
-        <p>CRA TO DO</p>
+      <header className='p-10 text-slate-500 text-6xl font-bold bg-neutral-100 text-center rounded-t-xl'>
+        <p>CRA TO-DO</p>
       </header>
     );
   }
