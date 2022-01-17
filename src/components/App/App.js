@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import * as yup from 'yup';
 import '../../styles/output.css';
 import {
-  Filter, Header, Message, NewTask, TaskList, ThemeToggle,
+  Filter, Header, Message, NewTask, Progress, TaskList, ThemeToggle,
 } from '../components';
 import './App.css';
 import { initialTasks } from './initialTasks';
@@ -195,6 +195,7 @@ export default class App extends Component {
           handleThemeToggle={this.handleThemeToggle}
           uiTheme={uiTheme}
         />
+
         <NewTask
           handleKeyPress={this.handleKeyPress}
           handleGetFocus={this.handleGetFocus}
@@ -202,6 +203,7 @@ export default class App extends Component {
           handleChange={this.handleChange}
           pendingTask={pendingTask}
         />
+
         <Message
           message={this.state.message}
         />
@@ -213,6 +215,10 @@ export default class App extends Component {
           handleTextFilter={this.handleTextFilter}
           handleStateFilter={this.handleStateFilter}
           handleDeleteCompleted={this.handleDeleteCompleted}
+        />
+
+        <Progress
+          message={this.state.message}
         />
 
         <TaskListWithSpinner
