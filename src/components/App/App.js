@@ -69,7 +69,7 @@ export default class App extends Component {
     this.setInfo();
   };
 
-  handleDeleteCompleted = (e) => {
+  handleDeleteCompleted = () => {
     this.setState((state) => {
       const tasks = state.tasks.filter(({ isDone }) => !isDone);
       return { tasks, stateFilter: stateFilterNames.all, pendingTask: '' };
