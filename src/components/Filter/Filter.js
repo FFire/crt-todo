@@ -1,45 +1,45 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React from 'react';
 import s from './Filter.module.css';
 
-export class Filter extends Component {
-  render() {
-    const {
-      stateFilterNames, stateFilter, textFilter, handleStateFilter, handleTextFilter, handleDeleteCompleted,
-    } = this.props;
-    const filterList = stateFilterNames.map((filterName) => (
-      <span key={filterName}>
+export const Filter = (props) => {
+  const {
+    stateFilterNames, stateFilter, textFilter, handleStateFilter,
+    handleTextFilter, handleDeleteCompleted,
+  } = props;
+  const filterList = stateFilterNames.map((filterName) => (
+    <span key={filterName}>
         <input type='radio' id={`filter-${filterName}`}
-          name='show' value={filterName}
-          checked={stateFilter === filterName}
-          onChange={handleStateFilter}
+               name='show' value={filterName}
+               checked={stateFilter === filterName}
+               onChange={handleStateFilter}
         />
         <label htmlFor={`filter-${filterName}`}>{filterName}</label>
       </span>));
 
-    return (
-      <div className={s.filter}>
-        <form >
-          <input
-            name='text'
-            value={textFilter}
-            onChange={handleTextFilter}
-            autoComplete='off'
-            placeholder='Filter tasks'
-          />
+  return (
+    <div className={s.filter}>
+      <form>
+        <input
+          name='text'
+          value={textFilter}
+          onChange={handleTextFilter}
+          autoComplete='off'
+          placeholder='Filter tasks'
+        />
 
-          {filterList}
-        </form>
+        {filterList}
+      </form>
 
-        <button
-          type='button'
-          className={s.button}
-          onClick={handleDeleteCompleted}
-        >Delete completed</button>
-      </div>
-    );
-  }
-}
+      <button
+        type='button'
+        className={s.button}
+        onClick={handleDeleteCompleted}
+      >Delete completed
+      </button>
+    </div>
+  );
+};
 
 Filter.propTypes = {
   textFilter: PropTypes.string.isRequired,
