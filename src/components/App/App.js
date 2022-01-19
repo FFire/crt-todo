@@ -40,7 +40,7 @@ const App = () => {
     return () => {
       clearTimeout(timer);
     };
-  });
+  }, []);
 
   const makeInfo = () => {
     const taskCount = tasks.length;
