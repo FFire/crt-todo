@@ -1,5 +1,5 @@
 import React from 'react';
-import { Spinner } from '../components';
+import { Spinner } from '../components/components';
 
 export const WithSpinner = (WrappedComponent) => class extends React.Component {
   render() {

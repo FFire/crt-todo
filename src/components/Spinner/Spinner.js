@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useContext } from 'react';
-import { theme, ThemeContext } from '../App/themeContext';
+import { theme, ThemeContext } from '../../cotext/themeContext';
 import s from './Spinner.module.css';
 
 export const Spinner = () => {

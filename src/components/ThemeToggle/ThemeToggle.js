@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { theme } from '../App/themeContext';
+import { theme } from '../../cotext/themeContext';
 
 export const ThemeToggle = ({ uiTheme, handleThemeToggle }) => (
     <>

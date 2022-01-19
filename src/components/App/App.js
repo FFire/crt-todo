@@ -5,9 +5,9 @@ import {
   Filter, Header, Message, NewTask, TaskList, ThemeToggle,
 } from '../components';
 import './App.css';
-import { initialTasks } from './initialTasks';
-import { theme, ThemeContext } from './themeContext';
-import { WithSpinner } from './WithSpinner';
+import { initialTasks } from '../../fixtures/initialTasks';
+import { theme, ThemeContext } from '../../cotext/themeContext';
+import { WithSpinner } from '../../HOC/WithSpinner';
 
 const TaskListWithSpinner = WithSpinner(TaskList);
 const messageMode = {
