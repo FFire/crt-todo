@@ -1,21 +1,33 @@
-import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import React from 'react';
 import s from './NewTask.module.css';
 
-export class NewTask extends Component {
-  render() {
-    return (
-      <input
-        className={s.newTodo}
-        name='newTask'
-        autoFocus='autofocus'
-        autoComplete='off'
-        placeholder='Add some tasks'
-        onKeyPress={this.props.handleKeyPress}
-        onChange={this.props.handleChange}
-        onFocus={this.props.handleGetFocus}
-        onBlur={this.props.handleLostFocus}
-        value={this.props.pendingTask}
-      />
-    );
-  }
-}
+export const NewTask = (props) => {
+  const {
+    handleKeyPress, handleChange, handleGetFocus,
+    handleLostFocus, pendingTask,
+  } = props;
+
+  return (
+    <input
+      className={s.newTodo}
+      name='newTask'
+      autoFocus='autofocus'
+      autoComplete='off'
+      placeholder='Add some tasks'
+      onKeyPress={handleKeyPress}
+      onChange={handleChange}
+      onFocus={handleGetFocus}
+      onBlur={handleLostFocus}
+      value={pendingTask}
+    />
+  );
+};
+
+NewTask.protoType = {
+  handleKeyPress: PropTypes.func.isRequired,
+  handleChange: PropTypes.func.isRequired,
+  handleGetFocus: PropTypes.func.isRequired,
+  handleLostFocus: PropTypes.func.isRequired,
+  pendingTask: PropTypes.string.isRequired,
+};
