@@ -36,7 +36,7 @@ const App = () => {
       setTasks(initialTasks);
       setIsLoading(false);
     },
-    1000);
+    10 * 1000);
 
     return () => {
       clearTimeout(timer);
@@ -200,7 +200,7 @@ const App = () => {
         />
 
         <Progress
-          message={this.state.message}
+          message={message}
         />
 
         <TaskListWithSpinner

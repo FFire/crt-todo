@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import React, { useContext } from 'react';
 import { theme, ThemeContext } from '../../cotext/themeContext';
 import '../../styles/output.css';
+import s from './Spinner.module.css';
 
 export const Spinner = () => {
   const UiTheme = useContext(ThemeContext);

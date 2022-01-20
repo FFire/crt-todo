@@ -315,7 +315,7 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-ordinal:  ;
   --tw-slashed-zero:  ;
   --tw-numeric-figure:  ;
-  --tw-numeric-spacing:  ;
+  --tw-numeric-spacing:
   --tw-numeric-fraction:  ;
   --tw-ring-inset:  ;
   --tw-ring-offset-width: 0px;
@@ -343,9 +343,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-backdrop-opacity:  ;
   --tw-backdrop-saturate:  ;
   --tw-backdrop-sepia:  ;
-}
-.static {
-  position: static;
 }
 .relative {
   position: relative;

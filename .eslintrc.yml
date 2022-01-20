@@ -10,5 +10,5 @@ extends:
 rules:
   no-console: 0
   no-underscore-dangle: [2, { "allow": ["__filename", "__dirname"] }]
-  max-len: [2, {"code": 120, "tabWidth": 2, "ignoreUrls": true}]
+  max-len: [2, {"code": 200, "tabWidth": 2, "ignoreUrls": true}]
   import/prefer-default-export: "off"
