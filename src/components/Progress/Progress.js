@@ -7,7 +7,7 @@ export class Progress extends React.Component {
     return <>
       <div className='block relative overflow-hidden p-0 mb-1 mx-2'>
         <div className="flex items-center justify-between my-2">
-          <p className="text-slate-500 text-sm">
+          <p className="text-slate-500 dark:text-black text-sm">
             {text}
           </p>
         </div>

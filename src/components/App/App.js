@@ -5,7 +5,6 @@ import '../../styles/output.css';
 import {
   Filter, Header, Message, NewTask, Progress, TaskList, ThemeToggle,
 } from '../components';
-import './App.css';
 import { initialTasks } from '../../fixtures/initialTasks';
 import { theme, ThemeContext } from '../../cotext/themeContext';
 import { WithSpinner } from '../../HOC/WithSpinner';
@@ -36,7 +35,7 @@ const App = () => {
       setTasks(initialTasks);
       setIsLoading(false);
     },
-    10 * 1000);
+    500);
 
     return () => {
       clearTimeout(timer);
@@ -101,7 +100,7 @@ const App = () => {
       const newTask = { id, text: newTaskText, isDone };
       const newMessage = { text: 'Task successfully added', mode: messageMode.info };
 
-      setTasks([...tasks, newTask]);
+      setTasks([newTask, ...tasks]);
       setMessage(newMessage);
       setPendingTask('');
       makeInfo();
