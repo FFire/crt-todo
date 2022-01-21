@@ -189,6 +189,10 @@ const App = () => {
           message={message}
         />
 
+        <Progress
+          message={message}
+        />
+
         <Filter
           stateFilterNames={Object.values(stateFilterNames)}
           stateFilter={stateFilter}
@@ -196,10 +200,6 @@ const App = () => {
           handleTextFilter={handleTextFilter}
           handleStateFilter={handleStateFilter}
           handleDeleteCompleted={handleDeleteCompleted}
-        />
-
-        <Progress
-          message={message}
         />
 
         <TaskListWithSpinner
