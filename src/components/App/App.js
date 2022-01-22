@@ -1,12 +1,13 @@
-import React, { Component } from 'react';
+/* eslint-disable function-paren-newline */
+import React, { useEffect, useState } from 'react';
 import * as yup from 'yup';
 import {
   Filter, Header, Message, NewTask, TaskList, ThemeToggle,
 } from '../components';
 import './App.css';
-import { initialTasks } from './initialTasks';
-import { theme, ThemeContext } from './themeContext';
-import { WithSpinner } from './WithSpinner';
+import { initialTasks } from '../../fixtures/initialTasks';
+import { theme, ThemeContext } from '../../cotext/themeContext';
+import { WithSpinner } from '../../HOC/WithSpinner';
 
 const TaskListWithSpinner = WithSpinner(TaskList);
 const messageMode = {
@@ -20,141 +21,128 @@ const stateFilterNames = {
   completed: 'Completed',
 };
 
-export default class App extends Component {
-  constructor(props) {
-    super(props);
+const App = () => {
+  const [tasks, setTasks] = useState([]);
+  const [pendingTask, setPendingTask] = useState('');
+  const [message, setMessage] = useState({ text: 'Hello there!', mode: messageMode.info });
+  const [stateFilter, setStateFilter] = useState('All');
+  const [textFilter, setTextFilter] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
+  const [uiTheme, setUiTheme] = useState(theme.DARK);
 
-    this.state = {
-      tasks: [],
-      stateFilter: 'All',
-      textFilter: '',
-      message: {
-        text: 'To add task press ENTER at the end.',
-        mode: messageMode.info,
-      },
-      pendingTask: '',
-      isLoading: true,
-      uiTheme: theme.DARK,
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setTasks(initialTasks);
+      setIsLoading(false);
+    },
+    1000);
+
+    return () => {
+      clearTimeout(timer);
     };
-  }
+  }, []);
 
-  componentDidMount = () => {
-    setTimeout(
-      () => this.setState({ tasks: initialTasks, isLoading: false }),
-      1000,
-    );
+  const makeInfo = () => {
+    const taskCount = tasks.length;
+    const completedTaskCount = tasks.filter(({ isDone }) => !isDone).length;
+    const text = `${completedTaskCount} out of ${taskCount} tasks left`;
+    const mode = messageMode.info;
+
+    setMessage({ text, mode });
   };
 
-  setInfo = () => {
-    this.setState((state) => {
-      const taskCount = state.tasks.length;
-      const completedTaskCount = state.tasks.filter(({ isDone }) => !isDone).length;
-      const text = `${completedTaskCount} out of ${taskCount} tasks left`;
-      const mode = messageMode.info;
-
-      return { message: { text, mode } };
-    });
-  };
-
-  handleToggle = (e) => {
+  // TODO сделать замену объектов через Object.assign()
+  const handleToggle = (e) => {
     const { id: targetId, checked: targetIsDone } = e.target;
+    const newTasks = tasks.map((task) => (task.id === parseInt(targetId, 10)
+      ? { ...task, isDone: targetIsDone }
+      : task));
 
-    this.setState((state) => {
-      const tasks = state.tasks.map((task) => (task.id === parseInt(targetId, 10)
-        ? { ...task, isDone: targetIsDone }
-        : task));
-      return { tasks };
-    });
-
-    this.setInfo();
+    setTasks(newTasks);
+    makeInfo();
   };
 
-  handleDeleteCompleted = (e) => {
-    this.setState((state) => {
-      const tasks = state.tasks.filter(({ isDone }) => !isDone);
-      return { tasks, stateFilter: stateFilterNames.all, pendingTask: '' };
-    });
+  const handleDeleteCompleted = () => {
+    const newTasks = tasks.filter(({ isDone }) => !isDone);
 
-    this.setInfo();
+    setTasks(newTasks);
+    setPendingTask('');
+    makeInfo();
+    setStateFilter(stateFilterNames.all);
   };
 
-  handleDeleteById = (e) => {
+  const handleDeleteById = (e) => {
     e.preventDefault();
 
     const { id: targetId } = e.target;
+    const newTasks = tasks.filter(({ id }) => id !== parseInt(targetId, 10));
 
-    this.setState((state) => {
-      const tasks = state.tasks.filter(({ id }) => id !== parseInt(targetId, 10));
-      return { tasks, pendingTask: '' };
-    });
-
-    this.setInfo();
+    setTasks(newTasks);
+    setPendingTask('');
+    makeInfo();
   };
 
-  handleGetFocus = (e) => {
-    const { value } = e.target;
+  const handleGetFocus = (e) => validate(e.target.value);
 
-    this.validate(value);
+  const handleChange = (e) => {
+    const { value: newTask } = e.target;
+    setPendingTask(newTask);
+
+    validate(newTask);
   };
 
-  handleChange = (e) => {
-    const { value: pendingTask } = e.target;
+  const handleKeyPress = (e) => {
+    const { value: newTaskText } = e.target;
 
-    this.setState(() => ({ pendingTask }));
-    this.validate(pendingTask);
-  };
-
-  handleKeyPress = (e) => {
-    const { value: text } = e.target;
-
-    if ((e.code === 'Enter') && this.validate(text)) {
-      const id = Math.max(...this.state.tasks.map((task) => task.id)) + 1;
+    if ((e.code === 'Enter') && validate(newTaskText)) {
+      const id = Math.max(...tasks.map((task) => task.id)) + 1;
       const isDone = false;
-      const newTask = { id, text, isDone };
-      this.setState((state) => (
-        {
-          tasks: [...state.tasks, newTask],
-          message: { text: 'Task successfully added', mode: messageMode.info },
-          pendingTask: '',
-        }
-      ));
+      const newTask = { id, text: newTaskText, isDone };
+      const newMessage = { text: 'Task successfully added', mode: messageMode.info };
+
+      setTasks([...tasks, newTask]);
+      setMessage(newMessage);
+      setPendingTask('');
+      makeInfo();
     }
   };
 
-  handleTextFilter = (e) => {
-    const { value: textFilter } = e.target;
+  const handleTextFilter = (e) => {
+    const { value: newTextFilter } = e.target;
 
-    this.setState(() => ({ textFilter }));
+    setTextFilter(newTextFilter);
   };
 
-  handleStateFilter = (e) => {
-    const { value: stateFilter } = e.target;
+  const handleStateFilter = (e) => {
+    const { value: newStateFilter } = e.target;
 
-    this.setState(() => ({ stateFilter }));
+    setStateFilter(newStateFilter);
   };
 
-  validate(pendingTask) {
-    const tasks = this.state.tasks.map(({ text }) => text.toLowerCase());
+  const validate = (taskText) => {
+    const loweredTasks = tasks.map(({ text }) => text.toLowerCase());
     const addingInfo = 'To add task press ENTER at the end';
 
     try {
       yup.string()
         .required('Task is required')
         .min(5, 'Task must be minimum 5 letters')
-        .notOneOf(tasks, 'Task already exist')
-        .validateSync(pendingTask.toLowerCase());
-      this.setState(() => ({ message: { text: addingInfo, mode: messageMode.info } }));
+        .notOneOf(loweredTasks, 'Task already exist')
+        .validateSync(taskText.toLowerCase());
+      setMessage({ text: addingInfo, mode: messageMode.info });
+
       return true;
     } catch (err) {
-      this.setState(() => ({ message: { text: err.message, mode: messageMode.error } }));
+      setMessage({ text: err.message, mode: messageMode.error });
+
       return false;
     }
-  }
+  };
 
-  getFilteredTasks = (tasks, textFilter, stateFilter) => tasks
-    .filter(({ text }) => text.toLowerCase().includes(textFilter.toLowerCase()))
+  const getFilteredTasks = (currTasks, currTextFilter, currStateFilter) => currTasks
+    .filter(({ text }) => text.toLowerCase().includes(currTextFilter.toLowerCase()))
     .filter(({ isDone }) => {
-      switch (stateFilter) {
+      switch (currStateFilter) {
         case stateFilterNames.all:
           return true;
 
@@ -165,62 +153,60 @@ export default class App extends Component {
           return isDone;
 
         default:
-          this.setState(() => ({ stateFilter: stateFilterNames.all }));
+          setStateFilter(stateFilterNames.all);
       }
 
       return true;
     });
 
-  handleThemeToggle = (e) => {
+  const handleThemeToggle = (e) => {
     const { checked } = e.target;
 
-    this.setState(() => ({
-      uiTheme: checked ? theme.DARK : theme.LIGHT,
-      pendingTask: '',
-    }));
-
-    this.setInfo();
+    setUiTheme(checked ? theme.DARK : theme.LIGHT);
+    setPendingTask('');
+    makeInfo();
   };
 
-  render() {
-    const {
-      pendingTask, uiTheme, stateFilter, textFilter, tasks: stateTasks,
-    } = this.state;
-
-    return (
+  return (
       <ThemeContext.Provider value={uiTheme}>
+
         <Header />
+
         <ThemeToggle
-          handleThemeToggle={this.handleThemeToggle}
+          handleThemeToggle={handleThemeToggle}
           uiTheme={uiTheme}
         />
+
         <NewTask
-          handleKeyPress={this.handleKeyPress}
-          handleGetFocus={this.handleGetFocus}
-          handleLostFocus={this.setInfo}
-          handleChange={this.handleChange}
+          handleKeyPress={handleKeyPress}
+          handleGetFocus={handleGetFocus}
+          handleLostFocus={makeInfo}
+          handleChange={handleChange}
           pendingTask={pendingTask}
         />
+
         <Message
-          message={this.state.message}
+          message={message}
         />
 
         <Filter
           stateFilterNames={Object.values(stateFilterNames)}
           stateFilter={stateFilter}
           textFilter={textFilter}
-          handleTextFilter={this.handleTextFilter}
-          handleStateFilter={this.handleStateFilter}
-          handleDeleteCompleted={this.handleDeleteCompleted}
+          handleTextFilter={handleTextFilter}
+          handleStateFilter={handleStateFilter}
+          handleDeleteCompleted={handleDeleteCompleted}
         />
 
         <TaskListWithSpinner
-          isLoading={this.state.isLoading}
-          tasks={this.getFilteredTasks(stateTasks, textFilter, stateFilter)}
-          handleDeleteById={this.handleDeleteById}
-          handleToggle={this.handleToggle}
+          isLoading={isLoading}
+          tasks={getFilteredTasks(tasks, textFilter, stateFilter)}
+          handleDeleteById={handleDeleteById}
+          handleToggle={handleToggle}
         />
+
       </ThemeContext.Provider>
-    );
-  }
-}
+  );
+};
+
+export default App;
