@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
 import App from './components/App/App';
 import './index.css';
 
@@ -7,7 +8,9 @@ ReactDOM.render(
   <React.StrictMode>
     <div className='App'>
       <section className='todoapp'>
-        <App />
+        <BrowserRouter>
+          <App/>
+        </BrowserRouter>
       </section>
     </div>
   </React.StrictMode>,

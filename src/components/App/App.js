@@ -1,13 +1,15 @@
 /* eslint-disable function-paren-newline */
 import React, { useEffect, useState } from 'react';
+import { Route, Routes } from 'react-router-dom';
 import * as yup from 'yup';
-import {
-  Filter, Header, Message, NewTask, TaskList, ThemeToggle,
-} from '../components';
-import './App.css';
-import { initialTasks } from '../../fixtures/initialTasks';
 import { theme, ThemeContext } from '../../cotext/themeContext';
+import { initialTasks } from '../../fixtures/initialTasks';
 import { WithSpinner } from '../../HOC/WithSpinner';
+import {
+  About, Filter, Header, Message, NewTask, NotFound, TaskList, ThemeToggle,
+} from '../components';
+import { routePaths } from '../routePaths';
+import './App.css';
 
 const TaskListWithSpinner = WithSpinner(TaskList);
 const messageMode = {
@@ -167,45 +169,53 @@ const App = () => {
     makeInfo();
   };
 
-  return (
-      <ThemeContext.Provider value={uiTheme}>
+  const PageApp = () => (
+    <>
+      <NewTask
+        handleKeyPress={handleKeyPress}
+        handleGetFocus={handleGetFocus}
+        handleLostFocus={makeInfo}
+        handleChange={handleChange}
+        pendingTask={pendingTask}
+      />
 
-        <Header />
+      <Message
+        message={message}
+      />
+
+      <Filter
+        stateFilterNames={Object.values(stateFilterNames)}
+        stateFilter={stateFilter}
+        textFilter={textFilter}
+        handleTextFilter={handleTextFilter}
+        handleStateFilter={handleStateFilter}
+        handleDeleteCompleted={handleDeleteCompleted}
+      />
+
+      <TaskListWithSpinner
+        isLoading={isLoading}
+        tasks={getFilteredTasks(tasks, textFilter, stateFilter)}
+        handleDeleteById={handleDeleteById}
+        handleToggle={handleToggle}
+      />
+    </>
+  );
+
+  return (
+    <ThemeContext.Provider value={uiTheme}>
+        <Header/>
 
         <ThemeToggle
           handleThemeToggle={handleThemeToggle}
           uiTheme={uiTheme}
         />
 
-        <NewTask
-          handleKeyPress={handleKeyPress}
-          handleGetFocus={handleGetFocus}
-          handleLostFocus={makeInfo}
-          handleChange={handleChange}
-          pendingTask={pendingTask}
-        />
-
-        <Message
-          message={message}
-        />
-
-        <Filter
-          stateFilterNames={Object.values(stateFilterNames)}
-          stateFilter={stateFilter}
-          textFilter={textFilter}
-          handleTextFilter={handleTextFilter}
-          handleStateFilter={handleStateFilter}
-          handleDeleteCompleted={handleDeleteCompleted}
-        />
-
-        <TaskListWithSpinner
-          isLoading={isLoading}
-          tasks={getFilteredTasks(tasks, textFilter, stateFilter)}
-          handleDeleteById={handleDeleteById}
-          handleToggle={handleToggle}
-        />
-
-      </ThemeContext.Provider>
+        <Routes>
+          <Route path={routePaths.HOME.path} element={<PageApp/>}/>
+          <Route path={routePaths.ABOUT.path} element={<About/>}/>
+          <Route path={routePaths.NOT_FOUNT.path} element={<NotFound/>}/>
+        </Routes>
+    </ThemeContext.Provider>
   );
 };
 
