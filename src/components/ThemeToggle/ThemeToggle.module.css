@@ -1,16 +1,18 @@
 .dark {
   color: black;
 }
+
 .justify {
-  display:inline;
+  display: inline;
   justify-content: right;
   justify-content: space-between;
-
 }
+
 .nav {
-  display:inline;
+  display: inline;
   width: max-content;
 }
+
 .linkItem {
   margin-left: 10px;
 }

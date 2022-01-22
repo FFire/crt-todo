@@ -169,8 +169,15 @@ const App = () => {
     makeInfo();
   };
 
-  const PageApp = () => (
-    <>
+  return (
+    <ThemeContext.Provider value={uiTheme}>
+      <Header/>
+
+      <ThemeToggle
+        handleThemeToggle={handleThemeToggle}
+        uiTheme={uiTheme}
+      />
+
       <NewTask
         handleKeyPress={handleKeyPress}
         handleGetFocus={handleGetFocus}
@@ -192,29 +199,16 @@ const App = () => {
         handleDeleteCompleted={handleDeleteCompleted}
       />
 
-      <TaskListWithSpinner
-        isLoading={isLoading}
-        tasks={getFilteredTasks(tasks, textFilter, stateFilter)}
-        handleDeleteById={handleDeleteById}
-        handleToggle={handleToggle}
-      />
-    </>
-  );
-
-  return (
-    <ThemeContext.Provider value={uiTheme}>
-        <Header/>
-
-        <ThemeToggle
-          handleThemeToggle={handleThemeToggle}
-          uiTheme={uiTheme}
-        />
-
-        <Routes>
-          <Route path={routePaths.HOME.path} element={<PageApp/>}/>
-          <Route path={routePaths.ABOUT.path} element={<About/>}/>
-          <Route path={routePaths.NOT_FOUNT.path} element={<NotFound/>}/>
-        </Routes>
+      <Routes>
+        <Route path={routePaths.HOME.path} element={ <TaskListWithSpinner
+          isLoading={isLoading}
+          tasks={getFilteredTasks(tasks, textFilter, stateFilter)}
+          handleDeleteById={handleDeleteById}
+          handleToggle={handleToggle}
+        />}/>
+        <Route path={routePaths.ABOUT.path} element={<About/>}/>
+        <Route path={routePaths.NOT_FOUNT.path} element={<NotFound/>}/>
+      </Routes>
     </ThemeContext.Provider>
   );
 };
