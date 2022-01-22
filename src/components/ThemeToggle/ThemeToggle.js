@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { theme } from '../../cotext/themeContext';
-import { routePaths } from '../routePaths';
+import { routePaths } from '../App/routePaths';
 import s from './ThemeToggle.module.css';
 
 export const ThemeToggle = ({ uiTheme, handleThemeToggle }) => (

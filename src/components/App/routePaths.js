@@ -1,5 +1,5 @@
 export const routePaths = {
   HOME: { path: '/', name: 'Home' },
   ABOUT: { path: 'about', name: 'About' },
-  NOT_FOUNT: { path: '*', name: 'PageNotFound' },
+  NOT_FOUND: { path: '*', name: 'Page not found' },
 };
