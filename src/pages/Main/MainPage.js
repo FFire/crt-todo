@@ -137,7 +137,7 @@ export const MainPage = () => {
 
       return true;
     } catch (err) {
-      setMessage({ text: err.message, mode: messageMode.error });
+      setMessage({ text: err.message, mode: messageMode.ERROR });
 
       return false;
     }
