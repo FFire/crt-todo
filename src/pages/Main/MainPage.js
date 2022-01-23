@@ -19,7 +19,6 @@ const TaskListWithSpinner = WithSpinner(TaskList);
 export const MainPage = () => {
   const reduxTasks = useSelector((state) => state.tasks);
   const dispatch = useDispatch();
-  // const [tasks, setTasks] = useState([]);
   const [pendingTask, setPendingTask] = useState('');
   const [message, setMessage] = useState({ text: 'Hello there!', mode: messageMode.INFO });
   const [stateFilter, setStateFilter] = useState('All');
@@ -29,8 +28,6 @@ export const MainPage = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       dispatch(addTasks(initialTasks));
-
-      // setTasks(initialTasks);
       setIsLoading(false);
     },
     1000);
@@ -52,19 +49,12 @@ export const MainPage = () => {
   // TODO сделать замену объектов через Object.assign()
   const handleToggle = (e) => {
     const payload = { id: e.target.id, checked: e.target.checked };
-    // const newTasks = tasks.map((task) => (task.id === parseInt(targetId, 10)
-    //   ? { ...task, isDone: targetIsDone }
-    //   : task));
-    dispatch(setIsDone(payload));
 
-    // setTasks(newTasks);
+    dispatch(setIsDone(payload));
     makeInfo();
   };
 
   const handleDeleteCompleted = () => {
-    // const newTasks = tasks.filter(({ isDone }) => !isDone);
-
-    // setTasks(newTasks);
     dispatch(removeCompletedTasks());
     setPendingTask('');
     makeInfo();
@@ -75,11 +65,8 @@ export const MainPage = () => {
     e.preventDefault();
 
     const { id: targetId } = e.target;
-    // const newTasks = tasks.filter(({ id }) => id !== parseInt(targetId, 10));
 
     dispatch(removeTaskById(targetId));
-
-    // setTasks(newTasks);
     setPendingTask('');
     makeInfo();
   };
@@ -88,8 +75,8 @@ export const MainPage = () => {
 
   const handleChange = (e) => {
     const { value: newTask } = e.target;
-    setPendingTask(newTask);
 
+    setPendingTask(newTask);
     validate(newTask);
   };
 
@@ -102,9 +89,7 @@ export const MainPage = () => {
       const newTask = { id, text: newTaskText, isDone };
       const newMessage = { text: 'Task successfully added', mode: messageMode.INFO };
 
-      // setTasks([...tasks, newTask]);
       dispatch(addTasks([newTask]));
-
       setMessage(newMessage);
       setPendingTask('');
       makeInfo();
