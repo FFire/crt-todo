@@ -11,26 +11,17 @@ import {
   Filter, Message, NewTask, TaskList,
 } from '../../components/components';
 import './Main.css';
+import { messageMode } from '../../components/Message/messageMode';
+import { stateFilterNames } from './stateFilterNames';
 
 const TaskListWithSpinner = WithSpinner(TaskList);
-export const messageMode = {
-  none: 'none',
-  info: 'info',
-  error: 'error',
-};
-const stateFilterNames = {
-  all: 'All',
-  active: 'Active',
-  completed: 'Completed',
-};
 
 export const MainPage = () => {
   const reduxTasks = useSelector((state) => state.tasks);
-  console.log('MainPage', reduxTasks.taskList);
   const dispatch = useDispatch();
   // const [tasks, setTasks] = useState([]);
   const [pendingTask, setPendingTask] = useState('');
-  const [message, setMessage] = useState({ text: 'Hello there!', mode: messageMode.info });
+  const [message, setMessage] = useState({ text: 'Hello there!', mode: messageMode.INFO });
   const [stateFilter, setStateFilter] = useState('All');
   const [textFilter, setTextFilter] = useState('');
   const [isLoading, setIsLoading] = useState(true);
@@ -53,7 +44,7 @@ export const MainPage = () => {
     const taskCount = reduxTasks.taskList.length;
     const completedTaskCount = reduxTasks.taskList.filter(({ isDone }) => !isDone).length;
     const text = `${completedTaskCount} out of ${taskCount} tasks left`;
-    const mode = messageMode.info;
+    const mode = messageMode.INFO;
 
     setMessage({ text, mode });
   };
@@ -77,7 +68,7 @@ export const MainPage = () => {
     dispatch(removeCompletedTasks());
     setPendingTask('');
     makeInfo();
-    setStateFilter(stateFilterNames.all);
+    setStateFilter(stateFilterNames.ALL);
   };
 
   const handleDeleteById = (e) => {
@@ -109,7 +100,7 @@ export const MainPage = () => {
       const id = Math.max(...reduxTasks.taskList.map((task) => task.id)) + 1;
       const isDone = false;
       const newTask = { id, text: newTaskText, isDone };
-      const newMessage = { text: 'Task successfully added', mode: messageMode.info };
+      const newMessage = { text: 'Task successfully added', mode: messageMode.INFO };
 
       // setTasks([...tasks, newTask]);
       dispatch(addTasks([newTask]));
@@ -142,7 +133,7 @@ export const MainPage = () => {
         .min(5, 'Task must be minimum 5 letters')
         .notOneOf(loweredTasks, 'Task already exist')
         .validateSync(taskText.toLowerCase());
-      setMessage({ text: addingInfo, mode: messageMode.info });
+      setMessage({ text: addingInfo, mode: messageMode.INFO });
 
       return true;
     } catch (err) {
@@ -156,17 +147,17 @@ export const MainPage = () => {
     .filter(({ text }) => text.toLowerCase().includes(currTextFilter.toLowerCase()))
     .filter(({ isDone }) => {
       switch (currStateFilter) {
-        case stateFilterNames.all:
+        case stateFilterNames.ALL:
           return true;
 
-        case stateFilterNames.active:
+        case stateFilterNames.ACTIVE:
           return !isDone;
 
-        case stateFilterNames.completed:
+        case stateFilterNames.COMPLETED:
           return isDone;
 
         default:
-          setStateFilter(stateFilterNames.all);
+          setStateFilter(stateFilterNames.ALL);
       }
 
       return true;
