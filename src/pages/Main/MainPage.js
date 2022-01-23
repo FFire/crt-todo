@@ -3,7 +3,7 @@ import * as yup from 'yup';
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
-  addTask, removeTaskById, removeCompletedTasks, setIsDone,
+  addTasks, removeTaskById, removeCompletedTasks, setIsDone,
 } from '../../slices/tasksSlice';
 import { initialTasks } from '../../fixtures/initialTasks';
 import { WithSpinner } from '../../HOC/WithSpinner';
@@ -13,7 +13,7 @@ import {
 import './Main.css';
 
 const TaskListWithSpinner = WithSpinner(TaskList);
-const messageMode = {
+export const messageMode = {
   none: 'none',
   info: 'info',
   error: 'error',
@@ -37,7 +37,7 @@ export const MainPage = () => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      dispatch(addTask(initialTasks));
+      dispatch(addTasks(initialTasks));
 
       // setTasks(initialTasks);
       setIsLoading(false);
@@ -112,7 +112,7 @@ export const MainPage = () => {
       const newMessage = { text: 'Task successfully added', mode: messageMode.info };
 
       // setTasks([...tasks, newTask]);
-      dispatch(addTask([newTask]));
+      dispatch(addTasks([newTask]));
 
       setMessage(newMessage);
       setPendingTask('');
