@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { TaskItem } from './TaskItem/TaskItem';
-import s from './TaskList.module.css';
 
 export const TaskList = (props) => {
   const { tasks, handleToggle, handleDeleteById } = props;
@@ -15,8 +14,8 @@ export const TaskList = (props) => {
   ));
 
   return (
-    <section className={s.main}>
-      <ul className={s.list}>{tasksList}</ul>
+    <section className='bg-slate-100 rounded-b-lg p-3'>
+      <ul>{tasksList}</ul>
     </section>
   );
 };

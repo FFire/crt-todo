@@ -1,35 +1,42 @@
-import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useContext } from 'react';
-import { theme, ThemeContext } from '../../../cotext/themeContext';
-import s from './TaskItem.module.css';
+import { ReactComponent as TrashCan } from '../../../assets/trashcan.svg';
+import { ThemeContext } from '../../../cotext/themeContext';
 
 export const TaskItem = (props) => {
   const { handleDeleteById, handleToggle, task: { id, text, isDone } } = props;
   const UiTheme = useContext(ThemeContext);
-  const itemClass = classNames(s.item, { [s.dark]: UiTheme === theme.DARK, [s.done]: isDone });
 
   return (
-    <li>
+    <li className='flex items-center pl-3 pr-2 group bg-slate-100 rounded-lg
+     hover:bg-gradient-to-l hover:from-violet-700/10 hover:to-emerald-700/10'>
       <input
         type='checkbox'
+        className='flex-none h-8 w-8 mx-1 my-3 accent-slate-600 hover:scale-110
+        hover:accent-slate-500 hover:shadow'
         id={id}
         defaultChecked={isDone}
         onChange={handleToggle}
-        className={s.toggle}
       />
 
-      <span
-        className={itemClass}
-      >{text}</span>
+      <p
+        className='grow w-full text-lg  text-slate-500 my-3 ml-3'
+      >{text}</p>
 
-      <input
+      <button
         type='button'
         id={id}
-        value='×'
-        className={s.destroy}
+        className='flex items-center justify-center w-12 h-12 rounded-full aspect-square bg-transparent
+      hover:bg-emerald-700/10 hover:shadow'
         onClick={handleDeleteById}
-      />
+      >
+
+        <TrashCan
+          id={id}
+          className="w-6 h-6 fill-transparent group-hover:fill-violet-900/20"
+          onClick={handleDeleteById}
+        />
+      </button>
     </li>
   );
 };

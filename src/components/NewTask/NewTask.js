@@ -29,7 +29,7 @@ export const NewTask = (props) => {
           <div className=''>
             <button type="button"
                     className="flex items-center justify-center w-12 h-12 bg-transparent hover:bg-slate-300 hover:scale-110 text-gray-500 rounded-full">
-              <PlusSign className="w-8 h-8 fill-transparent group-hover:fill-emerald-700/70 group-focus-within:fill-emerald-700/70"/>
+              <PlusSign className="w-8 h-8 fill-transparent group-focus-within:fill-emerald-700/70 group-hover:fill-emerald-700/70"/>
             </button>
           </div>
         </div>
