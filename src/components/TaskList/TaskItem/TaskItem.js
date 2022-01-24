@@ -26,7 +26,7 @@ export const TaskItem = (props) => {
       <button
         type='button'
         id={id}
-        className='flex items-center justify-center w-12 h-12 rounded-full aspect-square bg-transparent
+        className='flex items-center justify-center w-10 h-10 rounded-full aspect-square bg-transparent
       hover:bg-emerald-700/10 hover:shadow'
         onClick={handleDeleteById}
       >

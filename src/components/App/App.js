@@ -1,13 +1,13 @@
 /* eslint-disable function-paren-newline */
 import React, { useEffect, useState } from 'react';
 import * as yup from 'yup';
+import { theme, ThemeContext } from '../../cotext/themeContext';
+import { initialTasks } from '../../fixtures/initialTasks';
+import { WithSpinner } from '../../HOC/WithSpinner';
 import '../../styles/output.css';
 import {
   Filter, Header, Message, NewTask, Progress, TaskList, ThemeToggle,
 } from '../components';
-import { initialTasks } from '../../fixtures/initialTasks';
-import { theme, ThemeContext } from '../../cotext/themeContext';
-import { WithSpinner } from '../../HOC/WithSpinner';
 
 const TaskListWithSpinner = WithSpinner(TaskList);
 const messageMode = {
@@ -114,7 +114,7 @@ const App = () => {
   };
 
   const handleStateFilter = (e) => {
-    const { value: newStateFilter } = e.target;
+    const { name: newStateFilter } = e.target;
 
     setStateFilter(newStateFilter);
   };

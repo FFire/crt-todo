@@ -1,7 +1,6 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
-import s from './Message.module.css';
 import '../../styles/output.css';
 
 export const Message = ({ message: { text, mode } }) => {
