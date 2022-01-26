@@ -12,28 +12,34 @@ export const TaskItem = (props) => {
      hover:bg-gradient-to-l hover:from-violet-700/10 hover:to-emerald-700/10'>
       <input
         type='checkbox'
-        className='flex-none h-8 w-8 mx-1 my-3 accent-slate-600 hover:scale-110
-        hover:accent-slate-500 hover:shadow'
+        className='flex-none accent-slate-600 hover:scale-110 hover:accent-slate-500 hover:shadow duration-500
+        h-4 w-4 mx-1 my-2
+        sm:h-6 sm:w-6
+        md:h-8 md:w-8 md:mx-1 md:my-3'
         id={id}
         defaultChecked={isDone}
         onChange={handleToggle}
       />
 
       <p
-        className='grow w-full text-lg  text-slate-500 my-3 ml-3'
+        className='grow w-full text-slate-500 duration-500
+        text-sm my-4 ml-3
+        md:text-lg
+        '
       >{text}</p>
 
       <button
         type='button'
         id={id}
-        className='flex items-center justify-center w-10 h-10 rounded-full aspect-square bg-transparent
-      hover:bg-emerald-700/10 hover:shadow'
+        className='flex items-center justify-center  rounded-full aspect-square bg-transparent hover:bg-emerald-700/10 hover:shadow
+        w-10 h-10'
         onClick={handleDeleteById}
       >
 
         <TrashCan
           id={id}
-          className="w-6 h-6 fill-transparent group-hover:fill-violet-900/20"
+          className="fill-transparent group-hover:fill-violet-900/20
+          w-6 h-6"
           onClick={handleDeleteById}
         />
       </button>

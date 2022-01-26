@@ -22,14 +22,19 @@ export const Filter = (props) => {
         hidden
       />
       <label htmlFor={`filter-${filterName}`}
-        className="block text-center px-5 py-1 cursor-pointer select-none
-      peer-checked:bg-slate-300">{filterName}</label>
+        className="block text-center cursor-pointer select-none peer-checked:bg-slate-300 duration-500
+        px-1 py-1
+        sm:px-5
+      ">{filterName}</label>
     </div>
 
   ));
 
   return (
-    <div className="w-full pl-6 py-1 bg-slate-100 flex items-center justify-between text-sm font-light">
+    <div className="w-full pl-6 py-1 bg-slate-100 items-center justify-between text-sm font-light duration-500
+    block
+    sm:flex
+    ">
       <form>
         <input
           name='text'
@@ -42,22 +47,22 @@ export const Filter = (props) => {
         />
       </form>
 
-        <div className="flex items-center">
-          {filterList}
+        <div className='flex items-center mt-3 sm:mt-0'>
+          <div className="flex items-center ">
+            {filterList}
+          </div>
+          <button
+            type='button'
+            id='deleteCompleted'
+            className='flex group items-center justify-center w-10 h-10 mr-5 rounded-full aspect-square bg-transparent  hover:bg-emerald-700/10 hover:shadow'
+            onClick={handleDeleteCompleted}
+          >
+          <TrashCan
+            className="w-6 h-6 fill-slate-300 group-hover:fill-red-400"
+            onClick={handleDeleteCompleted}
+          />
+                </button>
         </div>
-
-        <button
-          type='button'
-          id='deleteCompleted'
-          className='flex group items-center justify-center w-10 h-10 mr-5 rounded-full aspect-square bg-transparent  hover:bg-emerald-700/10 hover:shadow'
-          onClick={handleDeleteCompleted}
-        >
-
-        <TrashCan
-          className="w-6 h-6 fill-slate-300 group-hover:fill-red-400"
-          onClick={handleDeleteCompleted}
-        />
-      </button>
     </div>
   );
 };

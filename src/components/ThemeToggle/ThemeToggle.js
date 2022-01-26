@@ -5,7 +5,7 @@ import '../../styles/output.css';
 
 export const ThemeToggle = ({ uiTheme, handleThemeToggle }) => (
   <>
-    <div className=' bg-slate-100'>
+    <div className=' bg-slate-100 sm:text-xl transition-all duration-500'>
       <div className='w-full pl-6 py-1 bg-slate-100 flex items-center justify-between rounded-lg hover:bg-slate-200'>
         <div className='flex items-center'>
           <input

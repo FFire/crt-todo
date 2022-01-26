@@ -1,16 +1,16 @@
 import React from 'react';
 import '../../styles/output.css';
 
-export const Header = () => (
+export const Header = ({ text }) => (
   <header className='bg-slate-100 sm:rounded-t-lg'>
     <div className='
-      text-transparent bg-clip-text bg-gradient-to-l from-emerald-500 to-fuchsia-500 text-center
+      text-transparent bg-clip-text bg-gradient-to-l duration-500 from-emerald-500 to-fuchsia-500 text-center
       p-4 text-3xl font-semibold
       sm:p-4 sm:text-3xl sm:font-bold
       md:p-10 md:text-4xl md:font-extrabold
       lg:p-10 lg:text-5xl
       xl:p-10 xl:text-6xl
-      '>CRA TO DO
+    '>{text}
     </div>
   </header>
 );

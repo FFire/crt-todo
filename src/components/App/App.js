@@ -170,7 +170,7 @@ const App = () => {
   return (
       <ThemeContext.Provider value={uiTheme}>
 
-        <Header />
+        <Header text='CRT ToDo'/>
 
         <ThemeToggle
           handleThemeToggle={handleThemeToggle}
