@@ -1,10 +1,10 @@
 /* eslint-disable function-paren-newline */
 import React, { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
+import { theme, ThemeContext } from '../../cotext/themeContext';
+import { AboutPage, MainPage, NotFoundPage } from '../../pages/pages';
 import { Header, ThemeToggle } from '../components';
 import { routePaths } from './routePaths';
-import { theme, ThemeContext } from '../../cotext/themeContext';
-import { NotFoundPage, MainPage, AboutPage } from '../../pages/pages';
 
 const App = () => {
   const [uiTheme, setUiTheme] = useState(theme.DARK);
@@ -18,7 +18,7 @@ const App = () => {
     <>
       <ThemeContext.Provider value={uiTheme}>
 
-      <Header/>
+      <Header text='CRA ToDo'/>
 
         <ThemeToggle
           handleThemeToggle={handleThemeToggle}
