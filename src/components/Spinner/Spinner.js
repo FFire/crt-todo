@@ -9,7 +9,7 @@ export const Spinner = () => {
   // const cssClasses = classNames(s.spinner, { [s.dark]: UiTheme === theme.DARK });
   return (
     <div className='pb-10 mt-14 flex items-center justify-center space-x-3'>
-      <div className="p-2 w-24 h-24 border-t-4 border-l-4 border-fuchsia-800 rounded-full animate-spin"></div>
+      <div className='p-2 w-24 h-24 border-t-4 border-l-4 border-fuchsia-800 rounded-full animate-spin' />
 
       <p className='p-3 text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-l
          from-emerald-700 to-fuchsia-700 animate-pulse'>

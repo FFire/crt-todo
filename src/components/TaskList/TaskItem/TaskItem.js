@@ -22,10 +22,9 @@ export const TaskItem = (props) => {
       />
 
       <p
-        className='grow w-full text-slate-500 duration-500
-        text-sm my-4 ml-3
-        md:text-lg
-        '
+        className='grow w-full my-4 ml-3 text-slate-500 duration-500
+        text-sm
+        md:text-lg'
       >{text}</p>
 
       <button
@@ -38,8 +37,8 @@ export const TaskItem = (props) => {
 
         <TrashCan
           id={id}
-          className="fill-transparent group-hover:fill-violet-900/20
-          w-6 h-6"
+          className='fill-transparent group-hover:fill-violet-900/20
+          w-6 h-6'
           onClick={handleDeleteById}
         />
       </button>

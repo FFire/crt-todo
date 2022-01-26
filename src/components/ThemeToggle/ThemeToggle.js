@@ -21,7 +21,7 @@ export const ThemeToggle = ({ uiTheme, handleThemeToggle }) => (
           >Dark mode</label>
         </div>
         <div className='pr-10 space-x-4 '>
-          <a className='text-gray-900/30 hover:text-gray-900/70' href="#">Home</a>
+          <a className='text-gray-900/30 hover:text-gray-900/70' href='#'>Home</a>
           <a className='text-gray-900/30 hover:text-gray-900/70' href='#'>About</a>
         </div>
       </div>

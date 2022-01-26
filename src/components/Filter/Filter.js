@@ -13,28 +13,28 @@ export const Filter = (props) => {
     <div key={filterName} className='border border-slate-500
     first-of-type:rounded-l-md last-of-type:rounded-r-md'>
       <input
-        type="radio"
+        type='radio'
         name={filterName}
         id={`filter-${filterName}`}
-        className="peer"
+        className='peer'
         checked={stateFilter === filterName}
         onChange={handleStateFilter}
         hidden
       />
       <label htmlFor={`filter-${filterName}`}
-        className="block text-center cursor-pointer select-none peer-checked:bg-slate-300 duration-500
+        className='block text-center cursor-pointer select-none peer-checked:bg-slate-300 duration-500
         px-1 py-1
         sm:px-5
-      ">{filterName}</label>
+      '>{filterName}</label>
     </div>
 
   ));
 
   return (
-    <div className="w-full pl-6 py-1 bg-slate-100 items-center justify-between text-sm font-light duration-500
+    <div className='w-full pl-6 py-1 bg-slate-100 items-center justify-between text-sm font-light duration-500
     block
     sm:flex
-    ">
+    '>
       <form>
         <input
           name='text'
@@ -48,7 +48,7 @@ export const Filter = (props) => {
       </form>
 
         <div className='flex items-center mt-3 sm:mt-0'>
-          <div className="flex items-center ">
+          <div className='flex items-center '>
             {filterList}
           </div>
           <button
@@ -58,7 +58,7 @@ export const Filter = (props) => {
             onClick={handleDeleteCompleted}
           >
           <TrashCan
-            className="w-6 h-6 fill-slate-300 group-hover:fill-red-400"
+            className='w-6 h-6 fill-slate-300 group-hover:fill-red-400'
             onClick={handleDeleteCompleted}
           />
                 </button>

@@ -11,7 +11,7 @@ export const Message = ({ message: { text, mode } }) => {
   });
 
   return (
-    <div className="w-full px-6 pb-2 bg-slate-100 text-transparent">
+    <div className='w-full px-6 pb-2 bg-slate-100 text-transparent'>
       <p className={className}>{text}</p>
     </div>
   );
