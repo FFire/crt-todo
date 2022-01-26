@@ -347,6 +347,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 .relative {
   position: relative;
 }
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
 .mx-2 {
   margin-left: 0.5rem;
   margin-right: 0.5rem;
@@ -404,9 +408,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .min-h-screen {
   min-height: 100vh;
 }
-.w-2\/3 {
-  width: 66.666667%;
-}
 .w-full {
   width: 100%;
 }
@@ -430,6 +431,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .w-4 {
   width: 1rem;
+}
+.min-w-full {
+  min-width: 100%;
 }
 .flex-auto {
   flex: 1 1 auto;
@@ -493,10 +497,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .rounded-lg {
   border-radius: 0.5rem;
-}
-.rounded-t-lg {
-  border-top-left-radius: 0.5rem;
-  border-top-right-radius: 0.5rem;
 }
 .rounded-b-lg {
   border-bottom-right-radius: 0.5rem;
@@ -578,8 +578,8 @@ Ensure the default browser behavior of the `hidden` attribute.
 .fill-transparent {
   fill: transparent;
 }
-.p-10 {
-  padding: 2.5rem;
+.p-4 {
+  padding: 1rem;
 }
 .p-2 {
   padding: 0.5rem;
@@ -587,13 +587,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .p-3 {
   padding: 0.75rem;
 }
-.py-6 {
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem;
-}
-.px-2 {
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
+.px-0 {
+  padding-left: 0px;
+  padding-right: 0px;
 }
 .px-5 {
   padding-left: 1.25rem;
@@ -611,11 +607,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding-left: 1.5rem;
   padding-right: 1.5rem;
 }
-.pt-10 {
-  padding-top: 2.5rem;
+.pt-0 {
+  padding-top: 0px;
 }
-.pb-8 {
-  padding-bottom: 2rem;
+.pb-0 {
+  padding-bottom: 0px;
 }
 .pl-6 {
   padding-left: 1.5rem;
@@ -648,9 +644,9 @@ Ensure the default browser behavior of the `hidden` attribute.
   font-size: 0.875rem;
   line-height: 1.25rem;
 }
-.text-6xl {
-  font-size: 3.75rem;
-  line-height: 1;
+.text-3xl {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
 }
 .text-2xl {
   font-size: 1.5rem;
@@ -666,6 +662,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .font-light {
   font-weight: 300;
+}
+.font-semibold {
+  font-weight: 600;
 }
 .font-extrabold {
   font-weight: 800;
@@ -827,18 +826,154 @@ Ensure the default browser behavior of the `hidden` attribute.
     margin-left: auto;
     margin-right: auto;
   }
-  .sm\:max-w-4xl {
-    max-width: 56rem;
+  .sm\:w-full {
+    width: 100%;
+  }
+  .sm\:min-w-0 {
+    min-width: 0px;
   }
   .sm\:rounded-lg {
     border-radius: 0.5rem;
   }
-  .sm\:py-12 {
-    padding-top: 3rem;
-    padding-bottom: 3rem;
+  .sm\:rounded-t-lg {
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
   }
-  .sm\:px-10 {
+  .sm\:p-6 {
+    padding: 1.5rem;
+  }
+  .sm\:p-4 {
+    padding: 1rem;
+  }
+  .sm\:text-3xl {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+  }
+  .sm\:font-bold {
+    font-weight: 700;
+  }
+}
+@media (min-width: 768px) {
+  .md\:mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .md\:w-11\/12 {
+    width: 91.666667%;
+  }
+  .md\:max-w-2xl {
+    max-width: 42rem;
+  }
+  .md\:rounded-lg {
+    border-radius: 0.5rem;
+  }
+  .md\:p-10 {
+    padding: 2.5rem;
+  }
+  .md\:px-10 {
     padding-left: 2.5rem;
     padding-right: 2.5rem;
+  }
+  .md\:pt-10 {
+    padding-top: 2.5rem;
+  }
+  .md\:pb-8 {
+    padding-bottom: 2rem;
+  }
+  .md\:text-4xl {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+  }
+  .md\:font-extrabold {
+    font-weight: 800;
+  }
+}
+@media (min-width: 1024px) {
+  .lg\:mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .lg\:w-5\/6 {
+    width: 83.333333%;
+  }
+  .lg\:max-w-3xl {
+    max-width: 48rem;
+  }
+  .lg\:rounded-lg {
+    border-radius: 0.5rem;
+  }
+  .lg\:p-10 {
+    padding: 2.5rem;
+  }
+  .lg\:px-10 {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+  .lg\:pt-10 {
+    padding-top: 2.5rem;
+  }
+  .lg\:pb-8 {
+    padding-bottom: 2rem;
+  }
+  .lg\:text-5xl {
+    font-size: 3rem;
+    line-height: 1;
+  }
+}
+@media (min-width: 1280px) {
+  .xl\:mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .xl\:w-3\/4 {
+    width: 75%;
+  }
+  .xl\:max-w-4xl {
+    max-width: 56rem;
+  }
+  .xl\:rounded-lg {
+    border-radius: 0.5rem;
+  }
+  .xl\:p-10 {
+    padding: 2.5rem;
+  }
+  .xl\:px-10 {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+  .xl\:pt-10 {
+    padding-top: 2.5rem;
+  }
+  .xl\:pb-8 {
+    padding-bottom: 2rem;
+  }
+  .xl\:text-6xl {
+    font-size: 3.75rem;
+    line-height: 1;
+  }
+}
+@media (min-width: 1536px) {
+  .\32xl\:mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .\32xl\:w-2\/3 {
+    width: 66.666667%;
+  }
+  .\32xl\:max-w-4xl {
+    max-width: 56rem;
+  }
+  .\32xl\:rounded-lg {
+    border-radius: 0.5rem;
+  }
+  .\32xl\:px-10 {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+  .\32xl\:pt-10 {
+    padding-top: 2.5rem;
+  }
+  .\32xl\:pb-8 {
+    padding-bottom: 2rem;
   }
 }
