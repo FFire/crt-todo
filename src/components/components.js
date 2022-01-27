@@ -6,4 +6,4 @@ export { NewTask } from './NewTask/NewTask';
 export { NotFound } from './NotFound/NotFound';
 export { Spinner } from './Spinner/Spinner';
 export { TaskList } from './TaskList/TaskList';
-export { ThemeToggle } from './ThemeToggle/ThemeToggle';
+export { ThemeToggle } from './ThemeToggle/ThemeToggle.tsx';

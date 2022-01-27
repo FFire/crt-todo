@@ -1,16 +1,20 @@
-import PropTypes from 'prop-types';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { theme } from '../../cotext/themeContext';
+import { Theme } from '../../cotext/themeContext.tsx';
 import { routePaths } from '../App/routePaths.tsx';
 import s from './ThemeToggle.module.css';
 
-export const ThemeToggle = ({ uiTheme, handleThemeToggle }) => (
+export interface IThemeProps {
+  uiTheme: Theme;
+  handleThemeToggle(e: HTMLInputElement): void;
+}
+
+export const ThemeToggle = ({ uiTheme, handleThemeToggle }: IThemeProps): JSX.Element => (
   <div className={s.nav}>
     <input
       type='checkbox'
       id='ThemeToggle'
-      defaultChecked={uiTheme === theme.DARK}
+      defaultChecked={uiTheme === Theme.DARK}
       onChange={handleThemeToggle}
     />
     <label htmlFor='ThemeToggle'>Dark mode</label>
@@ -20,8 +24,3 @@ export const ThemeToggle = ({ uiTheme, handleThemeToggle }) => (
     </div>
   </div>
 );
-
-ThemeToggle.propTypes = {
-  handleThemeToggle: PropTypes.func.isRequired,
-  UiTheme: PropTypes.string,
-};
