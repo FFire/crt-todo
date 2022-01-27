@@ -4,7 +4,7 @@ import { Route, Routes } from 'react-router-dom';
 import { theme, ThemeContext } from '../../cotext/themeContext';
 import { AboutPage, MainPage, NotFoundPage } from '../../pages/pages';
 import { Header, ThemeToggle } from '../components';
-import { routePaths } from './routePaths';
+import { routePaths } from './routePaths.tsx';
 
 const App = () => {
   const [uiTheme, setUiTheme] = useState(theme.DARK);

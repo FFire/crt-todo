@@ -5,7 +5,7 @@ export interface IHeaderMessage {
   text: string
 }
 
-export const Header = ({ text }: IHeaderMessage) => (
+export const Header = ({ text }: IHeaderMessage): JSX.Element => (
   <header className={s.appHeader}>
     <div>{text}</div>
   </header>
