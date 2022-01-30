@@ -4,6 +4,7 @@ import React, {
   ChangeEvent, KeyboardEvent, MouseEvent, useEffect, useState,
 } from 'react';
 import * as yup from 'yup';
+import { ValidationError } from 'yup';
 import {
   Filter, Message, NewTask, TaskList,
 } from '../../components/components';
@@ -13,8 +14,6 @@ import { ITask } from '../../components/TaskList/TaskItem/TaskItem';
 import { initialTasks } from '../../fixtures/initialTasks';
 import tasksStore, { IStatistic } from '../../store/TasksStore';
 import './Main.css';
-
-// const TaskListWithSpinner = WithSpinner(TaskList);
 
 export const MainPage = ():JSX.Element => {
   const [pendingTask, setPendingTask] = useState('');
@@ -33,7 +32,7 @@ export const MainPage = ():JSX.Element => {
     return () => clearTimeout(timer);
   }, []);
 
-  const makeInfo = ():void => {
+  const makeInfo = (): void => {
     const { completedTaskCount, taskCount }:IStatistic = tasksStore.statistic;
     const text = `${completedTaskCount} out of ${taskCount} tasks left`;
     const mode = MessageMode.info;
@@ -41,14 +40,14 @@ export const MainPage = ():JSX.Element => {
     setMessage({ text, mode });
   };
 
-  const handleToggle = (e: ChangeEvent<HTMLInputElement>):void => {
+  const handleToggle = (e: ChangeEvent<HTMLInputElement>): void => {
     const id: number = parseInt(e.target.id, 10);
     const { checked } = e.target;
     tasksStore.setIsDone(id, checked);
     makeInfo();
   };
 
-  const handleDeleteCompleted = ():void => {
+  const handleDeleteCompleted = (): void => {
     tasksStore.deleteCompleted();
     setPendingTask('');
     makeInfo();
@@ -114,8 +113,8 @@ export const MainPage = ():JSX.Element => {
       setMessage({ text: addingInfo, mode: MessageMode.info });
 
       return true;
-    } catch (err: any) {
-      setMessage({ text: err.message, mode: MessageMode.error });
+    } catch (err) {
+      setMessage({ text: (err as ValidationError).message, mode: MessageMode.error });
 
       return false;
     }
