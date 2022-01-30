@@ -1,13 +1,8 @@
 import classNames from 'classnames';
 import React, { ChangeEvent, MouseEvent, useContext } from 'react';
 import { Theme, ThemeContext } from '../../../cotext/themeContext';
+import { ITask } from '../../../store/TasksStore';
 import s from './TaskItem.module.css';
-
-export interface ITask {
-  id: number;
-  text: string;
-  isDone: boolean;
-}
 
 export interface ITaskItemProps {
   handleDeleteById(e: MouseEvent<HTMLInputElement>): void;

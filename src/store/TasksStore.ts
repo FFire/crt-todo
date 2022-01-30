@@ -1,16 +1,31 @@
 import { makeAutoObservable } from 'mobx';
-import { ITask } from '../components/TaskList/TaskItem/TaskItem';
+import { initialTasks } from '../fixtures/initialTasks';
 
 export interface IStatistic {
   completedTaskCount: number
   taskCount: number
 }
 
+export interface ITask {
+  id: number;
+  text: string;
+  isDone: boolean;
+}
+
 class TasksStore {
   mobxTasks: ITask[] = [];
 
+  isLoading = false;
+
+  dataLayer:ITask[] = initialTasks;
+
   constructor() {
     makeAutoObservable(this);
+  }
+
+  loadTasks():void {
+    this.mobxTasks = this.dataLayer;
+    this.isLoading = true;
   }
 
   setIsDone(targetId:number, targetIsDone:boolean): void {

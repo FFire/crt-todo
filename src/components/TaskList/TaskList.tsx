@@ -1,9 +1,10 @@
 import React, { ChangeEvent, MouseEvent } from 'react';
-import { Spinner } from '../components';
-import { ITask, TaskItem } from './TaskItem/TaskItem';
+import { ITask } from '../../store/TasksStore';
+import { Spinner } from '../Spinner/Spinner';
+import { TaskItem } from './TaskItem/TaskItem';
 import s from './TaskList.module.css';
 
-export interface ITaskListProps {
+interface ITaskListProps {
   isLoading: boolean;
   tasks: ITask[];
   handleToggle(e: ChangeEvent<HTMLInputElement>): void;

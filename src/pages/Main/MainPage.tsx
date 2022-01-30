@@ -1,18 +1,16 @@
+/* eslint-disable comma-dangle */
 /* eslint-disable function-paren-newline */
 import { observer } from 'mobx-react';
 import React, {
-  ChangeEvent, KeyboardEvent, MouseEvent, useEffect, useState,
+  ChangeEvent, KeyboardEvent, MouseEvent, useEffect, useState
 } from 'react';
 import * as yup from 'yup';
 import { ValidationError } from 'yup';
 import {
-  Filter, Message, NewTask, TaskList,
+  Filter, Message, MessageMode, NewTask, StateFilterNames, TaskList
 } from '../../components/components';
-import { StateFilterNames } from '../../components/Filter/Filter';
-import { MessageMode } from '../../components/Message/Message';
-import { ITask } from '../../components/TaskList/TaskItem/TaskItem';
 import { initialTasks } from '../../fixtures/initialTasks';
-import tasksStore, { IStatistic } from '../../store/TasksStore';
+import tasksStore, { IStatistic, ITask } from '../../store/TasksStore';
 import './Main.css';
 
 export const MainPage = ():JSX.Element => {
