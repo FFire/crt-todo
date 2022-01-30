@@ -1,12 +1,12 @@
-import React from 'react';
+import { ChangeEvent } from 'react';
 import { Link } from 'react-router-dom';
-import { Theme } from '../../cotext/themeContext.tsx';
-import { routePaths } from '../App/routePaths.tsx';
+import { Theme } from '../../cotext/themeContext';
+import { routePaths } from '../App/routePaths';
 import s from './ThemeToggle.module.css';
 
 export interface IThemeProps {
   uiTheme: Theme;
-  handleThemeToggle(e: HTMLInputElement): void;
+  handleThemeToggle(e: ChangeEvent<HTMLInputElement>): void;
 }
 
 export const ThemeToggle = ({ uiTheme, handleThemeToggle }: IThemeProps): JSX.Element => (
