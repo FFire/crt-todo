@@ -9,16 +9,17 @@ import { ValidationError } from 'yup';
 import {
   Filter, Message, MessageMode, NewTask, StateFilterNames, TaskList
 } from '../../components/components';
+import { IMessage } from '../../components/Message/Message';
 import { initialTasks } from '../../fixtures/initialTasks';
 import tasksStore, { IStatistic, ITask } from '../../store/TasksStore';
 import './Main.css';
 
 export const MainPage = ():JSX.Element => {
-  const [pendingTask, setPendingTask] = useState('');
-  const [message, setMessage] = useState({ text: 'Hello there!', mode: MessageMode.info });
-  const [stateFilter, setStateFilter] = useState(StateFilterNames.all);
-  const [textFilter, setTextFilter] = useState('');
-  const [isLoading, setIsLoading] = useState(true);
+  const [pendingTask, setPendingTask] = useState<string>('');
+  const [message, setMessage] = useState<IMessage>({ text: 'Hello there!', mode: MessageMode.info });
+  const [stateFilter, setStateFilter] = useState<StateFilterNames>(StateFilterNames.all);
+  const [textFilter, setTextFilter] = useState<string>('');
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const timer = setTimeout(() => {

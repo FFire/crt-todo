@@ -1,3 +1,3 @@
-export declare interface AppProps {
+export declare interface IAppProps {
   message: string;
 }
