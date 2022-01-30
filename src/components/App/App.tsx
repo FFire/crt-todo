@@ -1,24 +1,24 @@
 /* eslint-disable function-paren-newline */
-import React, { useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
+import { Theme, ThemeContext } from '../../cotext/themeContext';
+import { AboutPage, MainPage, NotFoundPage } from '../../pages/pages';
 import { Header, ThemeToggle } from '../components';
 import { routePaths } from './routePaths';
-import { theme, ThemeContext } from '../../cotext/themeContext';
-import { NotFoundPage, MainPage, AboutPage } from '../../pages/pages';
 
-const App = () => {
-  const [uiTheme, setUiTheme] = useState(theme.DARK);
-  const handleThemeToggle = (e) => {
+const App = (): JSX.Element => {
+  const [uiTheme, setUiTheme] = useState(Theme.DARK);
+  const handleThemeToggle = (e: ChangeEvent<HTMLInputElement>): void => {
     const { checked } = e.target;
 
-    setUiTheme(checked ? theme.DARK : theme.LIGHT);
+    setUiTheme(checked ? Theme.DARK : Theme.LIGHT);
   };
 
   return (
     <>
       <ThemeContext.Provider value={uiTheme}>
 
-      <Header/>
+      <Header text='CRA ToDo'/>
 
         <ThemeToggle
           handleThemeToggle={handleThemeToggle}

@@ -1,33 +1,25 @@
+/* eslint-disable comma-dangle */
 /* eslint-disable function-paren-newline */
-import React, { useEffect, useState } from 'react';
-import * as yup from 'yup';
 import { observer } from 'mobx-react';
-import { initialTasks } from '../../fixtures/initialTasks';
-import { WithSpinner } from '../../HOC/WithSpinner';
+import React, {
+  ChangeEvent, KeyboardEvent, MouseEvent, useEffect, useState
+} from 'react';
+import * as yup from 'yup';
+import { ValidationError } from 'yup';
 import {
-  Filter, Message, NewTask, TaskList,
+  Filter, Message, MessageMode, NewTask, StateFilterNames, TaskList
 } from '../../components/components';
+import { IMessage } from '../../components/Message/Message';
+import { initialTasks } from '../../fixtures/initialTasks';
+import tasksStore, { IStatistic, ITask } from '../../store/TasksStore';
 import './Main.css';
-import tasksStore from '../../store/TasksStore';
 
-const TaskListWithSpinner = WithSpinner(TaskList);
-const messageMode = {
-  none: 'none',
-  info: 'info',
-  error: 'error',
-};
-const stateFilterNames = {
-  all: 'All',
-  active: 'Active',
-  completed: 'Completed',
-};
-
-export const MainPage = () => {
-  const [pendingTask, setPendingTask] = useState('');
-  const [message, setMessage] = useState({ text: 'Hello there!', mode: messageMode.info });
-  const [stateFilter, setStateFilter] = useState('All');
-  const [textFilter, setTextFilter] = useState('');
-  const [isLoading, setIsLoading] = useState(true);
+export const MainPage = ():JSX.Element => {
+  const [pendingTask, setPendingTask] = useState<string>('');
+  const [message, setMessage] = useState<IMessage>({ text: 'Hello there!', mode: MessageMode.info });
+  const [stateFilter, setStateFilter] = useState<StateFilterNames>(StateFilterNames.all);
+  const [textFilter, setTextFilter] = useState<string>('');
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -36,58 +28,57 @@ export const MainPage = () => {
     },
     1000);
 
-    return () => {
-      clearTimeout(timer);
-    };
+    return () => clearTimeout(timer);
   }, []);
 
-  const makeInfo = () => {
-    const { completedTaskCount, taskCount } = tasksStore.statistic;
+  const makeInfo = (): void => {
+    const { completedTaskCount, taskCount }:IStatistic = tasksStore.statistic;
     const text = `${completedTaskCount} out of ${taskCount} tasks left`;
-    const mode = messageMode.info;
+    const mode = MessageMode.info;
 
     setMessage({ text, mode });
   };
 
-  const handleToggle = (e) => {
-    const { id, checked } = e.target;
+  const handleToggle = (e: ChangeEvent<HTMLInputElement>): void => {
+    const id: number = parseInt(e.target.id, 10);
+    const { checked } = e.target;
     tasksStore.setIsDone(id, checked);
     makeInfo();
   };
 
-  const handleDeleteCompleted = () => {
+  const handleDeleteCompleted = (): void => {
     tasksStore.deleteCompleted();
     setPendingTask('');
     makeInfo();
-    setStateFilter(stateFilterNames.all);
+    setStateFilter(StateFilterNames.all);
   };
 
-  const handleDeleteById = (e) => {
+  const handleDeleteById = (e: MouseEvent<HTMLInputElement>): void => {
     e.preventDefault();
-    const { id } = e.target;
+    const id: number = parseInt((e.target as HTMLInputElement).id, 10);
 
     tasksStore.deleteById(id);
     setPendingTask('');
     makeInfo();
   };
 
-  const handleGetFocus = (e) => validate(e.target.value);
+  const handleGetFocus = (e: ChangeEvent<HTMLInputElement>): boolean => validate(e.target.value);
 
-  const handleChange = (e) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
     const { value: newTask } = e.target;
     setPendingTask(newTask);
 
     validate(newTask);
   };
 
-  const handleKeyPress = (e) => {
-    const { value: newTaskText } = e.target;
+  const handleKeyPress = (e: KeyboardEvent<HTMLInputElement>): void => {
+    const { value: newTaskText } = e.target as HTMLInputElement;
 
     if ((e.code === 'Enter') && validate(newTaskText)) {
       const id = Math.max(...tasksStore.mobxTasks.map((task) => task.id)) + 1;
       const isDone = false;
       const newTask = { id, text: newTaskText, isDone };
-      const newMessage = { text: 'Task successfully added', mode: messageMode.info };
+      const newMessage = { text: 'Task successfully added', mode: MessageMode.info };
 
       tasksStore.addTasks([newTask]);
       setMessage(newMessage);
@@ -96,19 +87,19 @@ export const MainPage = () => {
     }
   };
 
-  const handleTextFilter = (e) => {
+  const handleTextFilter = (e: ChangeEvent<HTMLInputElement>): void => {
     const { value: newTextFilter } = e.target;
 
     setTextFilter(newTextFilter);
   };
-
-  const handleStateFilter = (e) => {
-    const { value: newStateFilter } = e.target;
+  // keyof typeof StateFilterNames
+  const handleStateFilter = (e: ChangeEvent<HTMLInputElement>): void => {
+    const newStateFilter: StateFilterNames = e.target.value as StateFilterNames;
 
     setStateFilter(newStateFilter);
   };
 
-  const validate = (taskText) => {
+  const validate = (taskText: string): boolean => {
     const loweredTasks = tasksStore.mobxTasks.map(({ text }) => text.toLowerCase());
     const addingInfo = 'To add task press ENTER at the end';
 
@@ -118,31 +109,35 @@ export const MainPage = () => {
         .min(5, 'Task must be minimum 5 letters')
         .notOneOf(loweredTasks, 'Task already exist')
         .validateSync(taskText.toLowerCase());
-      setMessage({ text: addingInfo, mode: messageMode.info });
+      setMessage({ text: addingInfo, mode: MessageMode.info });
 
       return true;
     } catch (err) {
-      setMessage({ text: err.message, mode: messageMode.error });
+      setMessage({ text: (err as ValidationError).message, mode: MessageMode.error });
 
       return false;
     }
   };
 
-  const getFilteredTasks = (currTasks, currTextFilter, currStateFilter) => currTasks
+  const getFilteredTasks = (
+    currTasks: ITask[],
+    currTextFilter: string,
+    currStateFilter:StateFilterNames,
+  ): ITask[] => currTasks
     .filter(({ text }) => text.toLowerCase().includes(currTextFilter.toLowerCase()))
     .filter(({ isDone }) => {
       switch (currStateFilter) {
-        case stateFilterNames.all:
+        case StateFilterNames.all:
           return true;
 
-        case stateFilterNames.active:
+        case StateFilterNames.active:
           return !isDone;
 
-        case stateFilterNames.completed:
+        case StateFilterNames.completed:
           return isDone;
 
         default:
-          setStateFilter(stateFilterNames.all);
+          setStateFilter(StateFilterNames.all);
       }
 
       return true;
@@ -151,7 +146,7 @@ export const MainPage = () => {
   const MobxTasks = observer(() => {
     const { mobxTasks } = tasksStore;
     return (
-      <TaskListWithSpinner
+      <TaskList
         isLoading={isLoading}
         tasks={getFilteredTasks(mobxTasks, textFilter, stateFilter)}
         handleDeleteById={handleDeleteById}
@@ -175,7 +170,7 @@ export const MainPage = () => {
       />
 
       <Filter
-        stateFilterNames={Object.values(stateFilterNames)}
+        stateFilterNames={Object.values(StateFilterNames)}
         stateFilter={stateFilter}
         textFilter={textFilter}
         handleTextFilter={handleTextFilter}

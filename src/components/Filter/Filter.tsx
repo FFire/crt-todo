@@ -1,13 +1,26 @@
-import PropTypes from 'prop-types';
-import React from 'react';
+import React, { ChangeEvent, MouseEvent } from 'react';
 import s from './Filter.module.css';
 
-export const Filter = (props) => {
+export interface IFilterProps {
+  stateFilterNames: string[];
+  stateFilter: string;
+  textFilter: string;
+  handleStateFilter(e: ChangeEvent<HTMLInputElement>): void;
+  handleTextFilter(e: ChangeEvent<HTMLInputElement>): void;
+  handleDeleteCompleted(e: MouseEvent<HTMLButtonElement>): void;
+}
+export enum StateFilterNames {
+  all = 'All',
+  active= 'Active',
+  completed= 'Completed',
+}
+
+export const Filter = (props: IFilterProps): JSX.Element => {
   const {
     stateFilterNames, stateFilter, textFilter, handleStateFilter,
     handleTextFilter, handleDeleteCompleted,
   } = props;
-  const filterList = stateFilterNames.map((filterName) => (
+  const filterList = stateFilterNames.map((filterName):JSX.Element => (
     <span key={filterName}>
         <input type='radio' id={`filter-${filterName}`}
                name='show' value={filterName}
@@ -39,13 +52,4 @@ export const Filter = (props) => {
       </button>
     </div>
   );
-};
-
-Filter.propTypes = {
-  textFilter: PropTypes.string.isRequired,
-  stateFilterNames: PropTypes.arrayOf(PropTypes.string).isRequired,
-  stateFilter: PropTypes.string.isRequired,
-  handleStateFilter: PropTypes.func.isRequired,
-  handleTextFilter: PropTypes.func.isRequired,
-  handleDeleteCompleted: PropTypes.func.isRequired,
 };

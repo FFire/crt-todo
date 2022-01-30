@@ -1,8 +1,15 @@
-import PropTypes from 'prop-types';
-import React from 'react';
+import React, { ChangeEvent, KeyboardEvent } from 'react';
 import s from './NewTask.module.css';
 
-export const NewTask = (props) => {
+export interface INewTaskProps {
+  handleKeyPress(e: KeyboardEvent<HTMLInputElement>): void;
+  handleChange(e: ChangeEvent<HTMLInputElement>): void;
+  handleGetFocus(e: ChangeEvent<HTMLInputElement>): void;
+  handleLostFocus(e: ChangeEvent<HTMLInputElement>): void;
+  pendingTask: string;
+}
+
+export const NewTask = (props: INewTaskProps): JSX.Element => {
   const {
     handleKeyPress, handleChange, handleGetFocus,
     handleLostFocus, pendingTask,
@@ -12,7 +19,7 @@ export const NewTask = (props) => {
     <input
       className={s.newTodo}
       name='newTask'
-      autoFocus='autofocus'
+      autoFocus
       autoComplete='off'
       placeholder='Add some tasks'
       onKeyPress={handleKeyPress}
@@ -22,12 +29,4 @@ export const NewTask = (props) => {
       value={pendingTask}
     />
   );
-};
-
-NewTask.protoType = {
-  handleKeyPress: PropTypes.func.isRequired,
-  handleChange: PropTypes.func.isRequired,
-  handleGetFocus: PropTypes.func.isRequired,
-  handleLostFocus: PropTypes.func.isRequired,
-  pendingTask: PropTypes.string.isRequired,
 };
