@@ -1,5 +1,7 @@
+/* eslint-disable lines-between-class-members */
 import { makeAutoObservable } from 'mobx';
 import { initialTasks } from '../fixtures/initialTasks';
+import { RootStore } from './RootStore';
 
 export interface IStatistic {
   completedTaskCount: number
@@ -12,15 +14,15 @@ export interface ITask {
   isDone: boolean;
 }
 
-class TasksStore {
+export class TasksStore {
   mobxTasks: ITask[] = [];
-
   isLoading = false;
-
   dataLayer:ITask[] = initialTasks;
+  rootStore: RootStore;
 
-  constructor() {
+  constructor(rootStore: RootStore) {
     makeAutoObservable(this);
+    this.rootStore = rootStore;
   }
 
   loadTasks():void {
@@ -52,5 +54,3 @@ class TasksStore {
     return { completedTaskCount, taskCount };
   }
 }
-
-export default new TasksStore();

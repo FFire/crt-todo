@@ -11,7 +11,8 @@ import {
 } from '../../components/components';
 import { IMessage } from '../../components/Message/Message';
 import { initialTasks } from '../../fixtures/initialTasks';
-import tasksStore, { IStatistic, ITask } from '../../store/TasksStore';
+import StoreContext, { stores } from '../../store/StoreContext';
+import { IStatistic, ITask } from '../../store/TasksStore';
 import './Main.css';
 
 export const MainPage = ():JSX.Element => {
@@ -23,7 +24,7 @@ export const MainPage = ():JSX.Element => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      tasksStore.addTasks(initialTasks);
+      stores.tasksStore.addTasks(initialTasks);
       setIsLoading(false);
     },
     1000);
@@ -32,7 +33,7 @@ export const MainPage = ():JSX.Element => {
   }, []);
 
   const makeInfo = (): void => {
-    const { completedTaskCount, taskCount }:IStatistic = tasksStore.statistic;
+    const { completedTaskCount, taskCount }:IStatistic = stores.tasksStore.statistic;
     const text = `${completedTaskCount} out of ${taskCount} tasks left`;
     const mode = MessageMode.info;
 
@@ -42,12 +43,12 @@ export const MainPage = ():JSX.Element => {
   const handleToggle = (e: ChangeEvent<HTMLInputElement>): void => {
     const id: number = parseInt(e.target.id, 10);
     const { checked } = e.target;
-    tasksStore.setIsDone(id, checked);
+    stores.tasksStore.setIsDone(id, checked);
     makeInfo();
   };
 
   const handleDeleteCompleted = (): void => {
-    tasksStore.deleteCompleted();
+    stores.tasksStore.deleteCompleted();
     setPendingTask('');
     makeInfo();
     setStateFilter(StateFilterNames.all);
@@ -57,7 +58,7 @@ export const MainPage = ():JSX.Element => {
     e.preventDefault();
     const id: number = parseInt((e.target as HTMLInputElement).id, 10);
 
-    tasksStore.deleteById(id);
+    stores.tasksStore.deleteById(id);
     setPendingTask('');
     makeInfo();
   };
@@ -75,12 +76,12 @@ export const MainPage = ():JSX.Element => {
     const { value: newTaskText } = e.target as HTMLInputElement;
 
     if ((e.code === 'Enter') && validate(newTaskText)) {
-      const id = Math.max(...tasksStore.mobxTasks.map((task) => task.id)) + 1;
+      const id = Math.max(...stores.tasksStore.mobxTasks.map((task) => task.id)) + 1;
       const isDone = false;
       const newTask = { id, text: newTaskText, isDone };
       const newMessage = { text: 'Task successfully added', mode: MessageMode.info };
 
-      tasksStore.addTasks([newTask]);
+      stores.tasksStore.addTasks([newTask]);
       setMessage(newMessage);
       setPendingTask('');
       makeInfo();
@@ -100,7 +101,7 @@ export const MainPage = ():JSX.Element => {
   };
 
   const validate = (taskText: string): boolean => {
-    const loweredTasks = tasksStore.mobxTasks.map(({ text }) => text.toLowerCase());
+    const loweredTasks = stores.tasksStore.mobxTasks.map(({ text }) => text.toLowerCase());
     const addingInfo = 'To add task press ENTER at the end';
 
     try {
@@ -144,7 +145,7 @@ export const MainPage = ():JSX.Element => {
     });
 
   const MobxTasks = observer(() => {
-    const { mobxTasks } = tasksStore;
+    const { mobxTasks } = stores.tasksStore;
     return (
       <TaskList
         isLoading={isLoading}
@@ -155,7 +156,7 @@ export const MainPage = ():JSX.Element => {
     );
   });
   return (
-    <>
+    <StoreContext.Provider value={stores}>
 
       <NewTask
         handleKeyPress={handleKeyPress}
@@ -179,6 +180,6 @@ export const MainPage = ():JSX.Element => {
       />
 
       <MobxTasks />
-    </>
+    </StoreContext.Provider>
   );
 };

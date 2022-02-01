@@ -1,20 +1,22 @@
 import { makeAutoObservable } from 'mobx';
+import { RootStore } from './RootStore';
 
 export const enum UiThemes {
   LIGHT = 'light',
   DARK = 'dark',
 }
 
-class UiStore {
+export class UiStore {
   mobxUiTheme: UiThemes = UiThemes.LIGHT;
 
-  constructor() {
+  rootStore: RootStore;
+
+  constructor(rootStore: RootStore) {
     makeAutoObservable(this);
+    this.rootStore = rootStore;
   }
 
   setUiTheme(uiTheme: UiThemes): void {
     this.mobxUiTheme = uiTheme;
   }
 }
-
-export default new UiStore();
