@@ -1,25 +1,33 @@
-import React, { ChangeEvent, MouseEvent } from 'react';
+import { observer } from 'mobx-react';
+import React, { ChangeEvent, MouseEvent, useContext } from 'react';
+import StoreContext from '../../store/StoreContext';
 import s from './Filter.module.css';
 
 export interface IFilterProps {
   stateFilterNames: string[];
   stateFilter: string;
-  textFilter: string;
   handleStateFilter(e: ChangeEvent<HTMLInputElement>): void;
-  handleTextFilter(e: ChangeEvent<HTMLInputElement>): void;
   handleDeleteCompleted(e: MouseEvent<HTMLButtonElement>): void;
 }
+
 export enum StateFilterNames {
   all = 'All',
   active= 'Active',
   completed= 'Completed',
 }
 
-export const Filter = (props: IFilterProps): JSX.Element => {
+const Filter = (props: IFilterProps): JSX.Element => {
   const {
-    stateFilterNames, stateFilter, textFilter, handleStateFilter,
-    handleTextFilter, handleDeleteCompleted,
+    stateFilterNames, stateFilter, handleStateFilter, handleDeleteCompleted,
   } = props;
+
+  const { uiStore } = useContext(StoreContext);
+
+  const onChangeTextFilter = (e: ChangeEvent<HTMLInputElement>):void => {
+    const { value } = e.target;
+    uiStore.setTextFilterContent(value);
+  };
+
   const filterList = stateFilterNames.map((filterName):JSX.Element => (
     <span key={filterName}>
         <input type='radio' id={`filter-${filterName}`}
@@ -35,8 +43,8 @@ export const Filter = (props: IFilterProps): JSX.Element => {
       <form>
         <input
           name='text'
-          value={textFilter}
-          onChange={handleTextFilter}
+          value={uiStore.textFilterContent}
+          onChange={onChangeTextFilter}
           autoComplete='off'
           placeholder='Filter tasks'
         />
@@ -53,3 +61,5 @@ export const Filter = (props: IFilterProps): JSX.Element => {
     </div>
   );
 };
+
+export default observer(Filter);

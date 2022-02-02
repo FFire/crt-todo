@@ -7,10 +7,10 @@ import React, {
 import * as yup from 'yup';
 import { ValidationError } from 'yup';
 import {
-  Filter, Message, MessageMode, NewTask, StateFilterNames, TaskList
+  Message, MessageMode, NewTask, StateFilterNames, TaskList
 } from '../../components/components';
+import Filter from '../../components/Filter/Filter';
 import { IMessage } from '../../components/Message/Message';
-import { initialTasks } from '../../fixtures/initialTasks';
 import StoreContext, { stores } from '../../store/StoreContext';
 import { IStatistic, ITask } from '../../store/TasksStore';
 import './Main.css';
@@ -24,8 +24,7 @@ export const MainPage = ():JSX.Element => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      stores.tasksStore.addTasks(initialTasks);
-      setIsLoading(false);
+      stores.tasksStore.loadTasks();
     },
     1000);
 
@@ -76,7 +75,7 @@ export const MainPage = ():JSX.Element => {
     const { value: newTaskText } = e.target as HTMLInputElement;
 
     if ((e.code === 'Enter') && validate(newTaskText)) {
-      const id = Math.max(...stores.tasksStore.mobxTasks.map((task) => task.id)) + 1;
+      const id = Math.max(...stores.tasksStore.tasks.map((task) => task.id)) + 1;
       const isDone = false;
       const newTask = { id, text: newTaskText, isDone };
       const newMessage = { text: 'Task successfully added', mode: MessageMode.info };
@@ -88,12 +87,6 @@ export const MainPage = ():JSX.Element => {
     }
   };
 
-  const handleTextFilter = (e: ChangeEvent<HTMLInputElement>): void => {
-    const { value: newTextFilter } = e.target;
-
-    setTextFilter(newTextFilter);
-  };
-  // keyof typeof StateFilterNames
   const handleStateFilter = (e: ChangeEvent<HTMLInputElement>): void => {
     const newStateFilter: StateFilterNames = e.target.value as StateFilterNames;
 
@@ -101,7 +94,7 @@ export const MainPage = ():JSX.Element => {
   };
 
   const validate = (taskText: string): boolean => {
-    const loweredTasks = stores.tasksStore.mobxTasks.map(({ text }) => text.toLowerCase());
+    const loweredTasks = stores.tasksStore.tasks.map(({ text }) => text.toLowerCase());
     const addingInfo = 'To add task press ENTER at the end';
 
     try {
@@ -145,7 +138,7 @@ export const MainPage = ():JSX.Element => {
     });
 
   const MobxTasks = observer(() => {
-    const { mobxTasks } = stores.tasksStore;
+    const { tasks: mobxTasks } = stores.tasksStore;
     return (
       <TaskList
         isLoading={isLoading}
@@ -173,8 +166,6 @@ export const MainPage = ():JSX.Element => {
       <Filter
         stateFilterNames={Object.values(StateFilterNames)}
         stateFilter={stateFilter}
-        textFilter={textFilter}
-        handleTextFilter={handleTextFilter}
         handleStateFilter={handleStateFilter}
         handleDeleteCompleted={handleDeleteCompleted}
       />

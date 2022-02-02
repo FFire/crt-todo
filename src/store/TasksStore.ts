@@ -14,10 +14,16 @@ export interface ITask {
   isDone: boolean;
 }
 
+export interface IFilter {
+  name: string;
+  fn: (ITask);
+}
+
 export class TasksStore {
-  mobxTasks: ITask[] = [];
-  isLoading = false;
+  tasks: ITask[] = [];
+  isLoading = true;
   dataLayer:ITask[] = initialTasks;
+  filters: IFilter[] = [];
   rootStore: RootStore;
 
   constructor(rootStore: RootStore) {
@@ -25,32 +31,31 @@ export class TasksStore {
     this.rootStore = rootStore;
   }
 
-  loadTasks():void {
-    this.mobxTasks = this.dataLayer;
-    this.isLoading = true;
-  }
-
   setIsDone(targetId:number, targetIsDone:boolean): void {
-    this.mobxTasks = this.mobxTasks.map((task) => (task.id === targetId
+    this.tasks = this.tasks.map((task) => (task.id === targetId
       ? { ...task, isDone: targetIsDone }
       : task));
   }
 
   deleteCompleted(): void {
-    this.mobxTasks = this.mobxTasks.filter(({ isDone }) => !isDone);
+    this.tasks = this.tasks.filter(({ isDone }) => !isDone);
   }
 
   deleteById(targetId: number): void {
-    this.mobxTasks = this.mobxTasks.filter(({ id }) => id !== targetId);
+    this.tasks = this.tasks.filter(({ id }) => id !== targetId);
   }
 
   addTasks(newTasks: ITask[]): void {
-    this.mobxTasks = [...newTasks, ...this.mobxTasks];
+    this.tasks = [...newTasks, ...this.tasks];
   }
 
+  loadTasks(): void {
+    this.addTasks(initialTasks);
+    this.isLoading = false;
+  }
   get statistic(): IStatistic {
-    const taskCount = this.mobxTasks.length;
-    const completedTaskCount = this.mobxTasks.filter(({ isDone }) => !isDone).length;
+    const taskCount = this.tasks.length;
+    const completedTaskCount = this.tasks.filter(({ isDone }) => !isDone).length;
     return { completedTaskCount, taskCount };
   }
 }
