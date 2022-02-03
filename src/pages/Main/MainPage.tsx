@@ -6,13 +6,13 @@ import React, {
 } from 'react';
 import * as yup from 'yup';
 import { ValidationError } from 'yup';
-import {
-  Message, MessageMode, NewTask, StateFilterNames, TaskList
-} from '../../components/components';
 import Filter from '../../components/Filter/Filter';
-import { IMessage } from '../../components/Message/Message';
+import { IMessage, Message, MessageMode } from '../../components/Message/Message';
+import NewTask from '../../components/NewTask/NewTask';
+import { TaskList } from '../../components/TaskList/TaskList';
 import StoreContext, { stores } from '../../store/StoreContext';
 import { IStatistic, ITask } from '../../store/TasksStore';
+import { StateFilterNames } from '../../store/UiStore';
 import './Main.css';
 
 export const MainPage = ():JSX.Element => {
@@ -20,7 +20,6 @@ export const MainPage = ():JSX.Element => {
   const [message, setMessage] = useState<IMessage>({ text: 'Hello there!', mode: MessageMode.info });
   const [stateFilter, setStateFilter] = useState<StateFilterNames>(StateFilterNames.all);
   const [textFilter, setTextFilter] = useState<string>('');
-  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -44,13 +43,6 @@ export const MainPage = ():JSX.Element => {
     const { checked } = e.target;
     stores.tasksStore.setIsDone(id, checked);
     makeInfo();
-  };
-
-  const handleDeleteCompleted = (): void => {
-    stores.tasksStore.deleteCompleted();
-    setPendingTask('');
-    makeInfo();
-    setStateFilter(StateFilterNames.all);
   };
 
   const handleDeleteById = (e: MouseEvent<HTMLInputElement>): void => {
@@ -87,12 +79,6 @@ export const MainPage = ():JSX.Element => {
     }
   };
 
-  const handleStateFilter = (e: ChangeEvent<HTMLInputElement>): void => {
-    const newStateFilter: StateFilterNames = e.target.value as StateFilterNames;
-
-    setStateFilter(newStateFilter);
-  };
-
   const validate = (taskText: string): boolean => {
     const loweredTasks = stores.tasksStore.tasks.map(({ text }) => text.toLowerCase());
     const addingInfo = 'To add task press ENTER at the end';
@@ -116,7 +102,7 @@ export const MainPage = ():JSX.Element => {
   const getFilteredTasks = (
     currTasks: ITask[],
     currTextFilter: string,
-    currStateFilter:StateFilterNames,
+    currStateFilter: StateFilterNames,
   ): ITask[] => currTasks
     .filter(({ text }) => text.toLowerCase().includes(currTextFilter.toLowerCase()))
     .filter(({ isDone }) => {
@@ -141,7 +127,7 @@ export const MainPage = ():JSX.Element => {
     const { tasks: mobxTasks } = stores.tasksStore;
     return (
       <TaskList
-        isLoading={isLoading}
+        isLoading={stores.tasksStore.isLoading}
         tasks={getFilteredTasks(mobxTasks, textFilter, stateFilter)}
         handleDeleteById={handleDeleteById}
         handleToggle={handleToggle}
@@ -163,12 +149,7 @@ export const MainPage = ():JSX.Element => {
         message={message}
       />
 
-      <Filter
-        stateFilterNames={Object.values(StateFilterNames)}
-        stateFilter={stateFilter}
-        handleStateFilter={handleStateFilter}
-        handleDeleteCompleted={handleDeleteCompleted}
-      />
+      <Filter />
 
       <MobxTasks />
     </StoreContext.Provider>

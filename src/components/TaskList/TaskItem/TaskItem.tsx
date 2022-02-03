@@ -16,7 +16,7 @@ export const TaskItem = (props: ITaskItemProps): JSX.Element => {
   const { handleDeleteById, handleToggle, task: { id, text, isDone } } = props;
   const UiTheme: Theme = useContext(ThemeContext);
   const itemClass: string = classNames(s.item, { [s.dark]: UiTheme === Theme.DARK, [s.done]: isDone });
-  console.log(stores);
+  // console.log(stores);
   return (
     <li>
       <input
@@ -27,9 +27,9 @@ export const TaskItem = (props: ITaskItemProps): JSX.Element => {
         className={s.toggle}
       />
 
-      <span
+      <p
         className={itemClass}
-      >{text}</span>
+      >{text}</p>
 
       <input
         type='button'

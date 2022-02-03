@@ -3,7 +3,8 @@ import React, { ChangeEvent, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { Theme, ThemeContext } from '../../cotext/themeContext';
 import { AboutPage, MainPage, NotFoundPage } from '../../pages/pages';
-import { Header, ThemeToggle } from '../components';
+import { Header } from '../Header/Header';
+import { ThemeToggle } from '../ThemeToggle/ThemeToggle';
 import { routePaths } from './routePaths';
 
 const App = (): JSX.Element => {

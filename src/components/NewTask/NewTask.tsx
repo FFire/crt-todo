@@ -1,4 +1,6 @@
-import React, { ChangeEvent, KeyboardEvent } from 'react';
+import { observer } from 'mobx-react';
+import React, { ChangeEvent, KeyboardEvent, useContext } from 'react';
+import StoreContext from '../../store/StoreContext';
 import s from './NewTask.module.css';
 
 export interface INewTaskProps {
@@ -9,11 +11,18 @@ export interface INewTaskProps {
   pendingTask: string;
 }
 
-export const NewTask = (props: INewTaskProps): JSX.Element => {
+const NewTask = (props: INewTaskProps): JSX.Element => {
   const {
-    handleKeyPress, handleChange, handleGetFocus,
-    handleLostFocus, pendingTask,
+    handleKeyPress, handleGetFocus,
+    handleLostFocus,
   } = props;
+  const { uiStore } = useContext(StoreContext);
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
+    const { value } = e.target;
+    uiStore.setPendingTaskContent(value);
+    // validate(newTask);
+  };
 
   return (
     <input
@@ -26,7 +35,8 @@ export const NewTask = (props: INewTaskProps): JSX.Element => {
       onChange={handleChange}
       onFocus={handleGetFocus}
       onBlur={handleLostFocus}
-      value={pendingTask}
+      value={uiStore.pendingTaskContent}
     />
   );
 };
+export default observer(NewTask);
