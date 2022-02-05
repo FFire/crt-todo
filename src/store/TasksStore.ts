@@ -15,8 +15,8 @@ export interface ITask {
 }
 
 export interface IFilter {
-  name: string;
-  fn: (ITask);
+  type: 'text' | 'state';
+  fn: (task: ITask) => boolean;
 }
 
 export class TasksStore {
@@ -53,9 +53,19 @@ export class TasksStore {
     this.addTasks(initialTasks);
     this.isLoading = false;
   }
+
+  setFilter(newFilter: IFilter): void {
+    const withoutFilter = this.filters.filter(({ type }) => type !== newFilter.type);
+    this.filters = [...withoutFilter, newFilter];
+  }
+
   get statistic(): IStatistic {
     const taskCount = this.tasks.length;
     const completedTaskCount = this.tasks.filter(({ isDone }) => !isDone).length;
     return { completedTaskCount, taskCount };
+  }
+
+  get getFilteredTasks():ITask[] {
+    return this.filters.reduce((acc, { fn }):ITask[] => acc.filter((task) => fn(task)), this.tasks);
   }
 }

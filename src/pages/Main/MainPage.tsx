@@ -11,15 +11,12 @@ import { IMessage, Message, MessageMode } from '../../components/Message/Message
 import NewTask from '../../components/NewTask/NewTask';
 import { TaskList } from '../../components/TaskList/TaskList';
 import StoreContext, { stores } from '../../store/StoreContext';
-import { IStatistic, ITask } from '../../store/TasksStore';
-import { StateFilterNames } from '../../store/UiStore';
+import { IStatistic } from '../../store/TasksStore';
 import './Main.css';
 
 export const MainPage = ():JSX.Element => {
   const [pendingTask, setPendingTask] = useState<string>('');
   const [message, setMessage] = useState<IMessage>({ text: 'Hello there!', mode: MessageMode.info });
-  const [stateFilter, setStateFilter] = useState<StateFilterNames>(StateFilterNames.all);
-  const [textFilter, setTextFilter] = useState<string>('');
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -99,41 +96,14 @@ export const MainPage = ():JSX.Element => {
     }
   };
 
-  const getFilteredTasks = (
-    currTasks: ITask[],
-    currTextFilter: string,
-    currStateFilter: StateFilterNames,
-  ): ITask[] => currTasks
-    .filter(({ text }) => text.toLowerCase().includes(currTextFilter.toLowerCase()))
-    .filter(({ isDone }) => {
-      switch (currStateFilter) {
-        case StateFilterNames.all:
-          return true;
-
-        case StateFilterNames.active:
-          return !isDone;
-
-        case StateFilterNames.completed:
-          return isDone;
-
-        default:
-          setStateFilter(StateFilterNames.all);
-      }
-
-      return true;
-    });
-
-  const MobxTasks = observer(() => {
-    const { tasks: mobxTasks } = stores.tasksStore;
-    return (
+  const MobxTasks = observer(() => (
       <TaskList
         isLoading={stores.tasksStore.isLoading}
-        tasks={getFilteredTasks(mobxTasks, textFilter, stateFilter)}
+        tasks={stores.tasksStore.getFilteredTasks}
         handleDeleteById={handleDeleteById}
         handleToggle={handleToggle}
       />
-    );
-  });
+  ));
   return (
     <StoreContext.Provider value={stores}>
 
