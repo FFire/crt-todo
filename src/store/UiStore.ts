@@ -24,10 +24,19 @@ export class UiStore {
   pendingTaskContent = '';
   textFilterContent = '';
   stateFilerChecked = StateFilterNames.all;
+  errorMesage = '';
 
   constructor(rootStore: RootStore) {
     makeAutoObservable(this);
     this.rootStore = rootStore;
+  }
+
+  setErrorMessage(message: string):void {
+    this.errorMesage = message;
+  }
+
+  get getErrorMessage(): string {
+    return this.errorMesage;
   }
 
   setPendingTaskContent(value:string):void {

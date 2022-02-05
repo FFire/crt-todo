@@ -1,29 +1,13 @@
-import classNames from 'classnames';
-import React from 'react';
-import s from './Message.module.css';
+import { observer } from 'mobx-react';
+import React, { useContext } from 'react';
+import StoreContext from '../../store/StoreContext';
 
-export const enum MessageMode {
-  none = 'none',
-  info = 'info',
-  error = 'error',
-}
-export interface IMessage {
-    text: string,
-    mode: MessageMode
-}
-
-export interface IMessageProps {
-  message: IMessage
-}
-
-export const Message = ({ message }: IMessageProps): JSX.Element => {
-  const className = classNames({
-    [s.info]: message.mode === 'info',
-    [s.error]: message.mode === 'error',
-    [s.none]: message.mode === 'none',
-  });
+const Message = (): JSX.Element => {
+  const { uiStore } = useContext(StoreContext);
 
   return (
-    <div className={className}>{message.text}</div>
+    <div className='error'>{uiStore.errorMesage}</div>
   );
 };
+
+export default observer(Message);

@@ -11,17 +11,35 @@ export interface INewTaskProps {
   pendingTask: string;
 }
 
-const NewTask = (props: INewTaskProps): JSX.Element => {
-  const {
-    handleKeyPress, handleGetFocus,
-    handleLostFocus,
-  } = props;
-  const { uiStore } = useContext(StoreContext);
+const NewTask = (): JSX.Element => {
+  const { uiStore, tasksStore } = useContext(StoreContext);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
     const { value } = e.target;
+    const error = tasksStore.getValidateErrors(value);
+    uiStore.setErrorMessage(error);
     uiStore.setPendingTaskContent(value);
-    // validate(newTask);
+  };
+  const handleGetFocus = (e: ChangeEvent<HTMLInputElement>): void => {
+    const { value } = e.target;
+    const error = tasksStore.getValidateErrors(value);
+    uiStore.setErrorMessage(error);
+  };
+  const handleLostFocus = (e: ChangeEvent<HTMLInputElement>): void => {
+    uiStore.setErrorMessage('');
+  };
+  const handleKeyPress = (e: KeyboardEvent<HTMLInputElement>): void => {
+    const { value: newTaskText } = e.target as HTMLInputElement;
+
+    if ((e.code === 'Enter') && !tasksStore.getValidateErrors(newTaskText)) {
+      const id = Math.max(...tasksStore.tasks.map((task) => task.id)) + 1;
+      const isDone = false;
+      const newTask = { id, text: newTaskText, isDone };
+
+      tasksStore.addTasks([newTask]);
+      uiStore.setErrorMessage('');
+      uiStore.setPendingTaskContent('');
+    }
   };
 
   return (
@@ -39,4 +57,5 @@ const NewTask = (props: INewTaskProps): JSX.Element => {
     />
   );
 };
+
 export default observer(NewTask);

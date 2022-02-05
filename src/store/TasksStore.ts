@@ -1,5 +1,7 @@
 /* eslint-disable lines-between-class-members */
 import { makeAutoObservable } from 'mobx';
+import * as yup from 'yup';
+import { ValidationError } from 'yup';
 import { initialTasks } from '../fixtures/initialTasks';
 import { RootStore } from './RootStore';
 
@@ -45,6 +47,14 @@ export class TasksStore {
     this.tasks = this.tasks.filter(({ id }) => id !== targetId);
   }
 
+  makeNewTask(taskText:string): ITask {
+    const id = Math.max(...this.tasks.map((task) => task.id)) + 1;
+    const isDone = false;
+    const newTask = { id, text: taskText, isDone };
+
+    return newTask;
+  }
+
   addTasks(newTasks: ITask[]): void {
     this.tasks = [...newTasks, ...this.tasks];
   }
@@ -59,6 +69,21 @@ export class TasksStore {
     this.filters = [...withoutFilter, newFilter];
   }
 
+  getValidateErrors(taskText: string): string {
+    try {
+      yup.string()
+        .required('Task is required')
+        .min(5, 'Task must be minimum 5 letters')
+        .notOneOf(this.getAllTasksText, 'Task already exist')
+        .validateSync(taskText.toLowerCase());
+
+      return '';
+    } catch (err) { return (err as ValidationError).message; }
+  }
+
+  get getAllTasksText(): string[] {
+    return this.tasks.map(({ text }) => text);
+  }
   get statistic(): IStatistic {
     const taskCount = this.tasks.length;
     const completedTaskCount = this.tasks.filter(({ isDone }) => !isDone).length;

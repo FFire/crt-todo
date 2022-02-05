@@ -1,32 +1,25 @@
-import React, { ChangeEvent, MouseEvent } from 'react';
-import { ITask } from '../../store/TasksStore';
+import { observer } from 'mobx-react';
+import React, { useContext } from 'react';
+import StoreContext from '../../store/StoreContext';
 import { Spinner } from '../Spinner/Spinner';
-import { TaskItem } from './TaskItem/TaskItem';
+import TaskItem from './TaskItem/TaskItem';
 import s from './TaskList.module.css';
 
-interface ITaskListProps {
-  isLoading: boolean;
-  tasks: ITask[];
-  handleToggle(e: ChangeEvent<HTMLInputElement>): void;
-  handleDeleteById(e: MouseEvent<HTMLInputElement>): void;
-}
+const TaskList = (): JSX.Element => {
+  const { tasksStore } = useContext(StoreContext);
 
-export const TaskList = (props: ITaskListProps): JSX.Element => {
-  const {
-    tasks, handleToggle, handleDeleteById, isLoading,
-  } = props;
-  const tasksList = tasks.map((task): JSX.Element => (
+  const tasksList = tasksStore.getFilteredTasks.map((task): JSX.Element => (
     <TaskItem
       key={task.id}
       task={task}
-      handleToggle={handleToggle}
-      handleDeleteById={handleDeleteById}
     />
   ));
 
-  return (isLoading)
+  return (tasksStore.isLoading)
     ? <Spinner/>
     : <section className={s.main}>
       <ul className={s.list}>{tasksList}</ul>
     </section>;
 };
+
+export default observer(TaskList);
