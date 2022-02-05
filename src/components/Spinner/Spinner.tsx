@@ -1,11 +1,12 @@
 import classNames from 'classnames';
 import React, { useContext } from 'react';
-import { Theme, ThemeContext } from '../../cotext/themeContext';
+import StoreContext from '../../store/StoreContext';
+import { UiThemes } from '../../store/UiStore';
 import s from './Spinner.module.css';
 
 export const Spinner = (): JSX.Element => {
-  const UiTheme: Theme = useContext(ThemeContext);
-  const cssClasses: string = classNames(s.spinner, { [s.dark]: UiTheme === Theme.DARK });
+  const { uiStore } = useContext(StoreContext);
+  const cssClasses: string = classNames(s.spinner, { [s.dark]: uiStore.getUiTheme === UiThemes.DARK });
   return (
     <p className={cssClasses}>
       Data is loading...

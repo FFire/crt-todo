@@ -32,7 +32,8 @@ const NewTask = (): JSX.Element => {
     const { value: newTaskText } = e.target as HTMLInputElement;
 
     if ((e.code === 'Enter') && !tasksStore.getValidateErrors(newTaskText)) {
-      const id = Math.max(...tasksStore.tasks.map((task) => task.id)) + 1;
+      // todo заменить на uuid
+      const id = Math.max(...tasksStore.getTasks.map((task) => task.id)) + 1;
       const isDone = false;
       const newTask = { id, text: newTaskText, isDone };
 
@@ -53,7 +54,7 @@ const NewTask = (): JSX.Element => {
       onChange={handleChange}
       onFocus={handleGetFocus}
       onBlur={handleLostFocus}
-      value={uiStore.pendingTaskContent}
+      value={uiStore.getPendingTaskContent}
     />
   );
 };

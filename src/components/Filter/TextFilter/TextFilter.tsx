@@ -20,7 +20,7 @@ const TextFilter: FC = () => {
     <form>
       <input
         name='text'
-        value={uiStore.textFilterContent}
+        value={uiStore.getTextFilterContent}
         onChange={onChangeTextFilter}
         autoComplete='off'
         placeholder='Filter tasks'

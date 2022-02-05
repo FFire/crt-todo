@@ -22,11 +22,10 @@ export interface IFilter {
 }
 
 export class TasksStore {
-  tasks: ITask[] = [];
-  isLoading = true;
-  dataLayer:ITask[] = initialTasks;
-  filters: IFilter[] = [];
   rootStore: RootStore;
+  private tasks: ITask[] = [];
+  private isLoading = true;
+  private filters: IFilter[] = [];
 
   constructor(rootStore: RootStore) {
     makeAutoObservable(this);
@@ -81,9 +80,14 @@ export class TasksStore {
     } catch (err) { return (err as ValidationError).message; }
   }
 
+  get getTasks(): ITask[] {
+    return this.tasks;
+  }
+
   get getAllTasksText(): string[] {
     return this.tasks.map(({ text }) => text);
   }
+
   get statistic(): IStatistic {
     const taskCount = this.tasks.length;
     const completedTaskCount = this.tasks.filter(({ isDone }) => !isDone).length;
@@ -92,5 +96,9 @@ export class TasksStore {
 
   get getFilteredTasks():ITask[] {
     return this.filters.reduce((acc, { fn }):ITask[] => acc.filter((task) => fn(task)), this.tasks);
+  }
+
+  get getIsLoading(): boolean {
+    return this.isLoading;
   }
 }

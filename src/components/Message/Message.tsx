@@ -6,7 +6,7 @@ const Message = (): JSX.Element => {
   const { uiStore } = useContext(StoreContext);
 
   return (
-    <div className='error'>{uiStore.errorMesage}</div>
+    <div className='error'>{uiStore.getErrorMessage}</div>
   );
 };
 

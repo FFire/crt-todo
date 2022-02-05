@@ -15,7 +15,7 @@ const TaskList = (): JSX.Element => {
     />
   ));
 
-  return (tasksStore.isLoading)
+  return (tasksStore.getIsLoading)
     ? <Spinner/>
     : <section className={s.main}>
       <ul className={s.list}>{tasksList}</ul>

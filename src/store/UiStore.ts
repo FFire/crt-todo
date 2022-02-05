@@ -13,18 +13,13 @@ export enum StateFilterNames {
   completed= 'Completed',
 }
 
-const elementsInit = {
-  pendingTask: '',
-};
-
 export class UiStore {
   rootStore: RootStore;
-  uiTheme: UiThemes = UiThemes.LIGHT;
-  elements: Record<string, string> = elementsInit;
-  pendingTaskContent = '';
-  textFilterContent = '';
-  stateFilerChecked = StateFilterNames.all;
-  errorMesage = '';
+  private uiTheme: UiThemes = UiThemes.LIGHT;
+  private pendingTaskContent = '';
+  private textFilterContent = '';
+  private stateFilerChecked = StateFilterNames.all;
+  private errorMesage = '';
 
   constructor(rootStore: RootStore) {
     makeAutoObservable(this);
@@ -41,6 +36,10 @@ export class UiStore {
 
   setPendingTaskContent(value:string):void {
     this.pendingTaskContent = value;
+  }
+
+  get getPendingTaskContent(): string {
+    return this.pendingTaskContent;
   }
 
   setStateFilter(stateFilterValue: StateFilterNames): void {
