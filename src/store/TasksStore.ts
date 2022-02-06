@@ -89,9 +89,9 @@ export class TasksStore {
     return this.tasks.map(({ text }) => text);
   }
 
-  get statistic(): IStatistic {
+  get getStatistic(): IStatistic {
     const taskCount = this.tasks.length;
-    const completedTaskCount = this.tasks.filter(({ isDone }) => !isDone).length;
+    const completedTaskCount = this.tasks.filter(({ isDone }) => isDone).length;
     return { completedTaskCount, taskCount };
   }
 

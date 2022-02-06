@@ -406,11 +406,14 @@ Ensure the default browser behavior of the `hidden` attribute.
 .h-6 {
   height: 1.5rem;
 }
-.h-2 {
-  height: 0.5rem;
-}
 .h-full {
   height: 100%;
+}
+.h-7 {
+  height: 1.75rem;
+}
+.h-2 {
+  height: 0.5rem;
 }
 .h-24 {
   height: 6rem;
@@ -424,6 +427,42 @@ Ensure the default browser behavior of the `hidden` attribute.
 .min-h-screen {
   min-height: 100vh;
 }
+.w-0 {
+  width: 0px;
+}
+.w-1\/12 {
+  width: 8.333333%;
+}
+.w-2\/12 {
+  width: 16.666667%;
+}
+.w-3\/12 {
+  width: 25%;
+}
+.w-4\/12 {
+  width: 33.333333%;
+}
+.w-5\/12 {
+  width: 41.666667%;
+}
+.w-6\/12 {
+  width: 50%;
+}
+.w-7\/12 {
+  width: 58.333333%;
+}
+.w-8\/12 {
+  width: 66.666667%;
+}
+.w-9\/12 {
+  width: 75%;
+}
+.w-10\/12 {
+  width: 83.333333%;
+}
+.w-11\/12 {
+  width: 91.666667%;
+}
 .w-full {
   width: 100%;
 }
@@ -432,9 +471,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .w-8 {
   width: 2rem;
-}
-.w-3\/5 {
-  width: 60%;
 }
 .w-24 {
   width: 6rem;
@@ -557,13 +593,13 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-gradient-from: #10b981;
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgb(16 185 129 / 0));
 }
-.from-slate-200 {
-  --tw-gradient-from: #e2e8f0;
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgb(226 232 240 / 0));
-}
 .from-cyan-400 {
   --tw-gradient-from: #22d3ee;
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgb(34 211 238 / 0));
+}
+.from-slate-200 {
+  --tw-gradient-from: #e2e8f0;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgb(226 232 240 / 0));
 }
 .from-emerald-700 {
   --tw-gradient-from: #047857;
@@ -572,11 +608,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .to-fuchsia-500 {
   --tw-gradient-to: #d946ef;
 }
-.to-stone-200 {
-  --tw-gradient-to: #e7e5e4;
-}
 .to-fuchsia-400 {
   --tw-gradient-to: #e879f9;
+}
+.to-stone-200 {
+  --tw-gradient-to: #e7e5e4;
 }
 .to-fuchsia-700 {
   --tw-gradient-to: #a21caf;
@@ -842,11 +878,9 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-bg-opacity: 1;
   background-color: rgb(203 213 225 / var(--tw-bg-opacity));
 }
-@media (prefers-color-scheme: dark) {
-  .dark\:text-black {
-    --tw-text-opacity: 1;
-    color: rgb(0 0 0 / var(--tw-text-opacity));
-  }
+.dark .dark\:text-black {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity));
 }
 @media (min-width: 640px) {
   .sm\:mt-0 {
