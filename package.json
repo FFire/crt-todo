@@ -9,7 +9,7 @@
     "lint": "npx eslint . --fix --ext .js,.ts,.jsx,.tsx",
     "csslint": "npx stylelint '**/*.css' --fix",
     "watch:css": "postcss ./src/styles/tailwind.css -o ./src/styles/output.css",
-    "watch": "chokidar \"./src/**/*.js\" -c \"npm run watch:css\"",
+    "watch": "chokidar \"./src/**/*.*\" -c \"npm run watch:css\"",
     "dev": "concurrently \"npm run watch\" \"npm run start\""
   },
   "browserslist": {

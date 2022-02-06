@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Header from './components/Header/Header';
 import ThemeToggle from './components/ThemeToggle/ThemeToggle';
-import './index.css';
 import { AboutPage, MainPage, NotFoundPage } from './pages/pages';
 import { routePaths } from './routes/routes';
 import StoreContext, { stores } from './store/StoreContext';
@@ -11,9 +10,9 @@ import './styles/output.css';
 
 ReactDOM.render(
   <React.StrictMode>
-    <main className='min-h-screen bg-gray-50  flex flex-col relative overflow-hidden'>
+    <div className='min-h-screen bg-gray-50 flex flex-col relative overflow-hidden'>
       <section className='
-          transition-all duration-500 bg-white shadow-xl ring-2 ring-gray-900/5
+          ring-2 transition-all duration-500 bg-white shadow-xl ring-gray-900/5
           mx-auto px-0 pt-0 pb-0 min-w-full
           sm:max-w-xl sm:rounded-lg sm:p-3 sm:w-full sm:min-w-0
           md:max-w-2xl md:mx-auto md:rounded-lg md:p-10 md:w-11/12 md:my-3
@@ -33,7 +32,7 @@ ReactDOM.render(
           </StoreContext.Provider>
         </BrowserRouter>
       </section>
-    </main>
+    </div>
   </React.StrictMode>,
   document.getElementById('root'),
 );
