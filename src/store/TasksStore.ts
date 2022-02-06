@@ -23,7 +23,7 @@ export interface IFilter {
 
 export class TasksStore {
   rootStore: RootStore;
-  tasks: ITask[] = [];
+  private tasks: ITask[] = [];
   private isLoading = true;
   private filters: IFilter[] = [];
 

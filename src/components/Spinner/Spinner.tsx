@@ -1,15 +1,12 @@
-import classNames from 'classnames';
-import React, { useContext } from 'react';
-import StoreContext from '../../store/StoreContext';
-import { UiThemes } from '../../store/UiStore';
-import s from './Spinner.module.css';
+import React from 'react';
 
-export const Spinner = (): JSX.Element => {
-  const { uiStore } = useContext(StoreContext);
-  const cssClasses: string = classNames(s.spinner, { [s.dark]: uiStore.getUiTheme === UiThemes.DARK });
-  return (
-    <p className={cssClasses}>
-      Data is loading...
-    </p>
-  );
-};
+export const Spinner = (): JSX.Element => (
+    <div className='pb-10 mt-14 flex items-center justify-center space-x-3'>
+      <div className='p-2 w-24 h-24 border-t-4 border-l-4 border-fuchsia-800 rounded-full animate-spin' />
+
+      <p className='p-3 text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-l
+         from-emerald-700 to-fuchsia-700 animate-pulse'>
+        Data is loading...
+      </p>
+    </div>
+);

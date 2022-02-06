@@ -3,10 +3,6 @@ import React, { useContext } from 'react';
 import StoreContext from '../../store/StoreContext';
 import '../../styles/output.css';
 
-export interface IHeaderMessage {
-  text: string
-}
-
 const Header = (): JSX.Element => {
   const { rootStore } = useContext(StoreContext);
 

@@ -15,7 +15,7 @@ const DeleteCompleted: FC = () => {
     id='deleteCompleted'
     className='flex group items-center justify-center w-10 h-10 mr-5 rounded-full
     aspect-square bg-transparent  hover:bg-emerald-700/10 hover:shadow'
-    onClick={tasksStore.deleteCompleted}
+    onClick={handleOnClick}
   >
   <TrashCan
     className='w-6 h-6 fill-slate-300 group-hover:fill-red-400'

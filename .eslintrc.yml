@@ -23,7 +23,7 @@ plugins: ["@typescript-eslint"]
 rules:
   no-console: 0
   no-underscore-dangle: [2, { "allow": ["__filename", "__dirname"] }]
-  max-len: [2, {"code": 120, "tabWidth": 2, "ignoreUrls": true}]
+  max-len: [2, {"code": 150, "tabWidth": 2, "ignoreUrls": true}]
   import/prefer-default-export: "off"
   "@typescript-eslint/explicit-function-return-type": "off"
   no-shadow: "off"
@@ -46,6 +46,7 @@ overrides:
 
   rules:
     "@typescript-eslint/explicit-function-return-type": ["error"]
+    max-len: [2, {"code": 150, "tabWidth": 2, "ignoreUrls": true}]
     "import/extensions":
     - error
     - ignorePackages
