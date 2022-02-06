@@ -5,9 +5,9 @@ import React, { useContext, useEffect } from 'react';
 import Filter from '../../components/Filter/Filter';
 import Message from '../../components/Message/Message';
 import NewTask from '../../components/NewTask/NewTask';
+import Progress from '../../components/Progress/Progress';
 import TaskList from '../../components/TaskList/TaskList';
 import StoreContext from '../../store/StoreContext';
-import './Main.css';
 
 export const MainPage = ():JSX.Element => {
   const { tasksStore } = useContext(StoreContext);
@@ -27,6 +27,7 @@ export const MainPage = ():JSX.Element => {
     <>
       <NewTask />
       <Message />
+      <Progress />
       <Filter />
       <TaskList />
     </>

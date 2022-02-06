@@ -3,7 +3,6 @@ import React, { useContext } from 'react';
 import StoreContext from '../../store/StoreContext';
 import { Spinner } from '../Spinner/Spinner';
 import TaskItem from './TaskItem/TaskItem';
-import s from './TaskList.module.css';
 
 const TaskList = (): JSX.Element => {
   const { tasksStore } = useContext(StoreContext);
@@ -17,8 +16,8 @@ const TaskList = (): JSX.Element => {
 
   return (tasksStore.getIsLoading)
     ? <Spinner/>
-    : <section className={s.main}>
-      <ul className={s.list}>{tasksList}</ul>
+    : <section className='bg-slate-100 rounded-b-lg p-3'>
+      <ul>{tasksList}</ul>
     </section>;
 };
 

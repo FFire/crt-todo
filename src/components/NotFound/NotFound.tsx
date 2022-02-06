@@ -1,18 +1,7 @@
-import classNames from 'classnames';
-import React, { useContext } from 'react';
-import StoreContext from '../../store/StoreContext';
-import { UiThemes } from '../../store/UiStore';
-import s from './NotFound.module.css';
+import React from 'react';
 
-export const NotFound = (): JSX.Element => {
-  const { uiStore } = useContext(StoreContext);
-  const cssClasses: string = classNames(s.spinner, { [s.dark]: uiStore.getUiTheme === UiThemes.DARK });
-
-  return (
-    <>
-      <div className={cssClasses}>
+export const NotFound = (): JSX.Element => (
+      <div className='bg-slate-100 sm:rounded-b-lg p-14 text-4xl text-slate-700 text-center'>
        <p>Sorry, page not found 😔 </p>
       </div>
-    </>
-  );
-};
+);

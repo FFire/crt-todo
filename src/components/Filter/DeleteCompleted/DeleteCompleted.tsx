@@ -11,15 +11,14 @@ const DeleteCompleted: FC = () => {
 
   return (
   <button
+    className='flex group items-center justify-center w-10 h-10 mr-5 ml-2 rounded-full
+    aspect-square bg-transparent  hover:bg-emerald-700/10 hover:shadow'
     type='button'
     id='deleteCompleted'
-    className='flex group items-center justify-center w-10 h-10 mr-5 rounded-full
-    aspect-square bg-transparent  hover:bg-emerald-700/10 hover:shadow'
     onClick={handleOnClick}
   >
   <TrashCan
-    className='w-6 h-6 fill-slate-300 group-hover:fill-red-400'
-    onClick={handleOnClick}
+    className='w-6 h-6 pointer-events-none fill-slate-300 group-hover:fill-red-400'
   />
   </button>
   );
