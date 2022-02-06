@@ -23,7 +23,7 @@ export interface IFilter {
 
 export class TasksStore {
   rootStore: RootStore;
-  private tasks: ITask[] = [];
+  tasks: ITask[] = [];
   private isLoading = true;
   private filters: IFilter[] = [];
 
@@ -39,11 +39,12 @@ export class TasksStore {
   }
 
   deleteCompleted(): void {
-    this.tasks = this.tasks.filter(({ isDone }) => !isDone);
+    // TODO why this generate error
+    this.tasks = this.getTasks.filter(({ isDone }) => !isDone);
   }
 
   deleteById(targetId: number): void {
-    this.tasks = this.tasks.filter(({ id }) => id !== targetId);
+    this.tasks = this.getTasks.filter(({ id }) => id !== targetId);
   }
 
   makeNewTask(taskText:string): ITask {

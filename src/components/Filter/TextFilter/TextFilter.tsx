@@ -20,6 +20,8 @@ const TextFilter: FC = () => {
     <form>
       <input
         name='text'
+        className='px-4 text-sm h-8 text-gray-600 placeholder-gray-300 rounded-full
+        hover:ring-2 hover:ring-slate-400 focus:outline-slate-400'
         value={uiStore.getTextFilterContent}
         onChange={onChangeTextFilter}
         autoComplete='off'

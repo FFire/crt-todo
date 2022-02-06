@@ -3,7 +3,6 @@ import React, { ChangeEvent, FC, useContext } from 'react';
 import StoreContext from '../../../store/StoreContext';
 import { ITask } from '../../../store/TasksStore';
 import { StateFilterNames } from '../../../store/UiStore';
-import styles from './StateFilter.module.css';
 
 const makeStateFilterFn = (stateFilterValue: StateFilterNames): ((task: ITask) => boolean) => {
   switch (stateFilterValue) {
@@ -29,22 +28,32 @@ const StateFilter: FC = () => {
   };
 
   const filterList: JSX.Element[] = Object.values(StateFilterNames).map((filterName) => (
-    <span key={filterName}>
+    <div
+      className='border border-slate-500
+      first-of-type:rounded-l-md last-of-type:rounded-r-md'
+      key={filterName}
+    >
       <input
+        className='peer'
         type='radio'
         id={`filter-${filterName}`}
-        name='show' value={filterName}
+        name={filterName}
+        value={filterName}
         checked={uiStore.getStateFilter === filterName}
         onChange={handleStateFilter}
+        hidden
       />
       <label
         htmlFor={`filter-${filterName}`}
+        className='block text-center cursor-pointer select-none peer-checked:bg-slate-300 duration-500
+        px-1 py-1
+        sm:px-5'
       >{filterName}</label>
-    </span>));
+    </div>));
 
   return (
-    <div className={styles.StateFilter}>
-        {filterList}
+    <div className='flex items-center'>
+      {filterList}
     </div>
   );
 };
