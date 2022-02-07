@@ -16,7 +16,7 @@ const TaskList = (): JSX.Element => {
 
   return (tasksStore.getIsLoading)
     ? <Spinner/>
-    : <section className='bg-slate-100 rounded-b-lg p-3'>
+    : <section className='rounded-b-lg p-3 bg-slate-100 dark:bg-slate-700 duration-500'>
       <ul>{tasksList}</ul>
     </section>;
 };

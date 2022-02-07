@@ -45,15 +45,22 @@ const NewTask = (): JSX.Element => {
 
   return (
     <>
-      <div className='w-full px-6 bg-slate-100 pt-6 pb-1'>
-        <div className='flex group items-center bg-white rounded-full
-            hover:ring-2 hover:ring-emerald-700/50 focus-within:ring-2 ring-emerald-700/50'>
+      <div className='w-full px-6 pt-6 pb-1 bg-slate-100 dark:bg-slate-700 duration-500'>
+        <div className='
+          flex group items-center rounded-full duration-500
+          bg-white
+          dark:bg-gray-500 dark:hover:ring-emerald-900 dark:ring-emerald-900
+          hover:ring-2 hover:ring-emerald-700/50 focus-within:ring-2 ring-emerald-700/50
+        '>
           <div className='flex-auto bg-transparent'>
             <input
               type='input'
-              className='px-4 w-full duration-500 bg-transparent text-gray-400 placeholder-gray-200 rounded-full focus:outline-none
+              className='px-4 w-full duration-500 bg-transparent rounded-full focus:outline-none
                 text-xl h-8
-                md:text-2xl md:h-12'
+                md:text-2xl md:h-12
+                text-gray-400 placeholder-gray-200
+                dark:text-gray-300 dark:placeholder-gray-400
+              '
               autoFocus
               autoComplete='off'
               placeholder='Add some tasks'
@@ -66,11 +73,18 @@ const NewTask = (): JSX.Element => {
           </div>
           <button
             type='button'
-            className='flex items-center justify-center  bg-transparent hover:bg-slate-300 hover:scale-110 text-gray-500 rounded-full
+            className='flex items-center justify-center  bg-transparent rounded-full duration-500
+              hover:bg-slate-300 hover:scale-110
+              dark:hover:bg-slate-800
               h-6 w-6 mr-1
-              md:h-12 md:w-12 md:mr-0'>
+              md:h-12 md:w-12 md:mr-0
+            '>
             <PlusSign
-              className='w-8 h-8 fill-transparent group-focus-within:fill-emerald-700/70 group-hover:fill-emerald-700/70'
+              className='
+                w-8 h-8 fill-transparent duration-500
+                group-focus-within:fill-emerald-700/70 group-hover:fill-emerald-700/70
+                dark:group-focus-within:fill-emerald-700 dark:group-hover:fill-emerald-700
+              '
             />
           </button>
         </div>

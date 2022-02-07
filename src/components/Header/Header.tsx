@@ -7,7 +7,7 @@ const Header = (): JSX.Element => {
   const { rootStore } = useContext(StoreContext);
 
   return (
-    <header className='bg-slate-100 sm:rounded-t-lg'>
+    <header className='bg-slate-100 dark:bg-slate-700 sm:rounded-t-lg duration-500'>
       <div className='
         text-transparent bg-clip-text bg-gradient-to-l duration-500 from-emerald-500 to-fuchsia-500 text-center
         p-4 text-3xl font-semibold

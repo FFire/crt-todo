@@ -29,8 +29,11 @@ const StateFilter: FC = () => {
 
   const filterList: JSX.Element[] = Object.values(StateFilterNames).map((filterName) => (
     <div
-      className='border border-slate-500
-      first-of-type:rounded-l-md last-of-type:rounded-r-md'
+      className='
+      border first-of-type:rounded-l-md last-of-type:rounded-r-md duration-500
+      border-slate-600
+      dark:border-slate-400
+      '
       key={filterName}
     >
       <input
@@ -45,9 +48,13 @@ const StateFilter: FC = () => {
       />
       <label
         htmlFor={`filter-${filterName}`}
-        className='block text-center cursor-pointer select-none peer-checked:bg-slate-300 duration-500
+        className='
+        block text-center cursor-pointer select-none duration-500
         px-1 py-1
-        sm:px-5'
+        sm:px-5
+        peer-checked:bg-slate-300
+        dark:text-slate-300 dark:peer-checked:bg-slate-500
+        '
       >{filterName}</label>
     </div>));
 

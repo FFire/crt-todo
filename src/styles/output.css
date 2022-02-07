@@ -400,6 +400,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .aspect-square {
   aspect-ratio: 1 / 1;
 }
+.h-4 {
+  height: 1rem;
+}
 .h-8 {
   height: 2rem;
 }
@@ -417,9 +420,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .h-24 {
   height: 6rem;
-}
-.h-4 {
-  height: 1rem;
 }
 .h-10 {
   height: 2.5rem;
@@ -538,9 +538,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-right: calc(1rem * var(--tw-space-x-reverse));
   margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)));
 }
-.overflow-hidden {
-  overflow: hidden;
-}
 .rounded-full {
   border-radius: 9999px;
 }
@@ -564,21 +561,17 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-border-opacity: 1;
   border-color: rgb(134 25 143 / var(--tw-border-opacity));
 }
-.border-slate-500 {
+.border-slate-600 {
   --tw-border-opacity: 1;
-  border-color: rgb(100 116 139 / var(--tw-border-opacity));
-}
-.bg-gray-50 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(249 250 251 / var(--tw-bg-opacity));
-}
-.bg-white {
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  border-color: rgb(71 85 105 / var(--tw-border-opacity));
 }
 .bg-slate-100 {
   --tw-bg-opacity: 1;
   background-color: rgb(241 245 249 / var(--tw-bg-opacity));
+}
+.bg-white {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 .bg-transparent {
   background-color: transparent;
@@ -639,10 +632,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .p-3 {
   padding: 0.75rem;
 }
-.px-0 {
-  padding-left: 0px;
-  padding-right: 0px;
-}
 .px-6 {
   padding-left: 1.5rem;
   padding-right: 1.5rem;
@@ -650,6 +639,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 .py-6 {
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
+}
+.px-0 {
+  padding-left: 0px;
+  padding-right: 0px;
 }
 .py-1 {
   padding-top: 0.25rem;
@@ -739,10 +732,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .text-gray-400 {
   --tw-text-opacity: 1;
   color: rgb(156 163 175 / var(--tw-text-opacity));
-}
-.text-gray-500 {
-  --tw-text-opacity: 1;
-  color: rgb(107 114 128 / var(--tw-text-opacity));
 }
 .text-slate-500 {
   --tw-text-opacity: 1;
@@ -878,9 +867,129 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-bg-opacity: 1;
   background-color: rgb(203 213 225 / var(--tw-bg-opacity));
 }
-.dark .dark\:text-black {
+.dark .dark\:border-slate-400 {
+  --tw-border-opacity: 1;
+  border-color: rgb(148 163 184 / var(--tw-border-opacity));
+}
+.dark .dark\:bg-slate-700 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(51 65 85 / var(--tw-bg-opacity));
+}
+.dark .dark\:bg-slate-900 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(15 23 42 / var(--tw-bg-opacity));
+}
+.dark .dark\:bg-slate-800 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(30 41 59 / var(--tw-bg-opacity));
+}
+.dark .dark\:bg-gray-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(107 114 128 / var(--tw-bg-opacity));
+}
+.dark .dark\:from-cyan-600 {
+  --tw-gradient-from: #0891b2;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgb(8 145 178 / 0));
+}
+.dark .dark\:from-slate-600 {
+  --tw-gradient-from: #475569;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgb(71 85 105 / 0));
+}
+.dark .dark\:to-fuchsia-600 {
+  --tw-gradient-to: #c026d3;
+}
+.dark .dark\:to-zinc-500 {
+  --tw-gradient-to: #71717a;
+}
+.dark .dark\:fill-slate-500 {
+  fill: #64748b;
+}
+.dark .dark\:text-slate-100 {
   --tw-text-opacity: 1;
-  color: rgb(0 0 0 / var(--tw-text-opacity));
+  color: rgb(241 245 249 / var(--tw-text-opacity));
+}
+.dark .dark\:text-gray-300 {
+  --tw-text-opacity: 1;
+  color: rgb(209 213 219 / var(--tw-text-opacity));
+}
+.dark .dark\:text-slate-400 {
+  --tw-text-opacity: 1;
+  color: rgb(148 163 184 / var(--tw-text-opacity));
+}
+.dark .dark\:text-gray-200\/40 {
+  color: rgb(229 231 235 / 0.4);
+}
+.dark .dark\:text-slate-300 {
+  --tw-text-opacity: 1;
+  color: rgb(203 213 225 / var(--tw-text-opacity));
+}
+.dark .dark\:placeholder-gray-400::placeholder {
+  --tw-placeholder-opacity: 1;
+  color: rgb(156 163 175 / var(--tw-placeholder-opacity));
+}
+.dark .dark\:accent-slate-400 {
+  accent-color: #94a3b8;
+}
+.dark .dark\:shadow-none {
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+.dark .dark\:ring-gray-900\/10 {
+  --tw-ring-color: rgb(17 24 39 / 0.1);
+}
+.dark .dark\:ring-emerald-900 {
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgb(6 78 59 / var(--tw-ring-opacity));
+}
+.dark .dark\:hover\:bg-slate-800:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(30 41 59 / var(--tw-bg-opacity));
+}
+.dark .dark\:hover\:bg-slate-600:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(71 85 105 / var(--tw-bg-opacity));
+}
+.dark .dark\:hover\:from-violet-900\/20:hover {
+  --tw-gradient-from: rgb(76 29 149 / 0.2);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgb(76 29 149 / 0));
+}
+.dark .dark\:hover\:to-emerald-900\/60:hover {
+  --tw-gradient-to: rgb(6 78 59 / 0.6);
+}
+.dark .dark\:hover\:text-gray-200\/70:hover {
+  color: rgb(229 231 235 / 0.7);
+}
+.dark .dark\:hover\:accent-slate-400:hover {
+  accent-color: #94a3b8;
+}
+.dark .dark\:hover\:shadow-none:hover {
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+.dark .dark\:hover\:ring-emerald-900:hover {
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgb(6 78 59 / var(--tw-ring-opacity));
+}
+.dark .dark\:focus\:outline-slate-100:focus {
+  outline-color: #f1f5f9;
+}
+.dark .group:focus-within .dark\:group-focus-within\:fill-emerald-700 {
+  fill: #047857;
+}
+.dark .group:hover .dark\:group-hover\:fill-emerald-700 {
+  fill: #047857;
+}
+.dark .group:hover .dark\:group-hover\:fill-red-400\/50 {
+  fill: rgb(248 113 113 / 0.5);
+}
+.dark .group:hover .dark\:group-hover\:fill-slate-500 {
+  fill: #64748b;
+}
+.dark .peer:checked ~ .dark\:peer-checked\:bg-slate-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(100 116 139 / var(--tw-bg-opacity));
 }
 @media (min-width: 640px) {
   .sm\:mt-0 {

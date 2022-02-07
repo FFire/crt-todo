@@ -15,7 +15,7 @@ export enum StateFilterNames {
 
 export class UiStore {
   rootStore: RootStore;
-  private uiTheme: UiThemes = UiThemes.LIGHT;
+  private uiTheme: UiThemes = UiThemes.DARK;
   private pendingTaskContent = '';
   private textFilterContent = '';
   private stateFilerChecked = StateFilterNames.all;
@@ -64,5 +64,8 @@ export class UiStore {
 
   get getUiTheme():UiThemes {
     return this.uiTheme;
+  }
+  get getDarkMode():boolean {
+    return this.uiTheme === UiThemes.DARK;
   }
 }

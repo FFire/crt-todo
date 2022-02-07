@@ -27,22 +27,28 @@ const Progress = (): JSX.Element => {
 
   const progressClass = cn(
     statisticToClass(tasksStore.getStatistic),
-    'h-full rounded-full bg-gradient-to-r from-cyan-400 to-fuchsia-400 duration-500',
+    'h-full rounded-full bg-gradient-to-r duration-500',
+    'from-cyan-400 to-fuchsia-400',
+    'dark:from-cyan-600 dark:to-fuchsia-600',
   );
 
   return (
-          <div className='w-full px-6 pb-2 bg-slate-100 '>
-            <p className='text-slate-500 pl-6 dark:text-black duration-500 h-7
-              text-sm md:text-base'
-            >
-              {statisticToText(tasksStore.getStatistic)}
-            </p>
-            <div className='w-full bg-gradient-to-r from-slate-200 to-stone-200 rounded-full duration-500
-              h-2 md:h-4'
-            >
-              <div className={progressClass}/>
-            </div>
-          </div>
+    <div className='w-full px-6 pb-2 duration-500
+      bg-slate-100 dark:bg-slate-700'>
+      <p className='pl-6 h-7 duration-500
+        text-sm md:text-base
+        text-slate-500 dark:text-slate-400
+      '>
+        {statisticToText(tasksStore.getStatistic)}
+      </p>
+      <div className='w-full bg-gradient-to-r rounded-full duration-500
+        h-2 md:h-4
+        from-slate-200 to-stone-200
+        dark:from-slate-600 dark:to-zinc-500
+      '>
+        <div className={progressClass}/>
+      </div>
+    </div>
   );
 };
 
