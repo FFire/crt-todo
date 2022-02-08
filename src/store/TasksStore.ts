@@ -81,6 +81,11 @@ export class TasksStore {
     } catch (err) { return (err as ValidationError).message; }
   }
 
+  updateTask(newTask: ITask):void {
+    const taskIndex = this.tasks.findIndex(({ id }) => id === newTask.id);
+    this.tasks = Object.assign([...this.tasks], { [taskIndex]: newTask });
+  }
+
   get getTasks(): ITask[] {
     return this.tasks;
   }
