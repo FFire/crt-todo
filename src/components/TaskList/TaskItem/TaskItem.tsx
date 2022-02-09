@@ -1,8 +1,10 @@
 import { observer } from 'mobx-react';
 import React, {
-  ChangeEvent, KeyboardEvent, MouseEvent, useContext, useState,
+  ChangeEvent, FormEvent, KeyboardEvent, MouseEvent, useContext, useState,
 } from 'react';
+import { ReactComponent as Cancel } from '../../../assets/cancel.svg';
 import { ReactComponent as EditMode } from '../../../assets/edit.svg';
+import { ReactComponent as OK } from '../../../assets/ok.svg';
 import { ReactComponent as TrashCan } from '../../../assets/trashcan.svg';
 import StoreContext from '../../../store/StoreContext';
 import { ITask } from '../../../store/TasksStore';
@@ -48,21 +50,59 @@ const TaskItem = (props: ITaskItemProps): JSX.Element => {
     setEditedTask(newText);
   };
 
+  const handleCancel = (e: MouseEvent<HTMLButtonElement>): void => {
+    setEditedTask(text);
+    setEditMode(false);
+  };
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
+    tasksStore.updateTask({ id, text: editedTask, isDone });
+    setEditMode(false);
+  };
+
   const showInput = (): JSX.Element => (
-    <textarea
-      className='grow px-4 my-4 mr-4 w-full  rounded-lg duration-500
-      hover:ring-2 hover:ring-slate-400 focus:outline-slate-400
-      text-sm md:text-lg
-      text-gray-600 placeholder-gray-300
-      dark:text-gray-50 dark:placeholder-gray-400 dark:bg-gray-400 dark:focus:outline-slate-100'
-      name='editText'
-      autoFocus
-      value={editedTask}
-      autoComplete='off'
-      placeholder='Filter tasks'
-      onChange={handleEditText}
-      onKeyPress={handleKeyPress}
-    />
+    <form
+      className='flex w-full items-center pl-3 pr-2 group  rounded-lg duration-500'
+      onSubmit={handleSubmit}
+    >
+      <textarea
+        className='grow px-4 my-4 mr-4 w-full  rounded-lg duration-500
+        hover:ring-2 hover:ring-slate-400 focus:outline-slate-400
+        text-sm md:text-lg
+        text-gray-600 placeholder-gray-300
+        dark:text-gray-50 dark:placeholder-gray-400 dark:bg-gray-400 dark:focus:outline-slate-100'
+        name='editText'
+        autoFocus
+        value={editedTask}
+        autoComplete='off'
+        placeholder='Filter tasks'
+        onChange={handleEditText}
+        onKeyPress={handleKeyPress}
+      />
+
+      <button
+      className='w-10 h-10 flex items-center justify-center rounded-full aspect-square bg-transparent hover:shadow duration-500
+      hover:bg-emerald-700/10 dark:hover:bg-slate-600'
+      id={id.toString()}
+      type='reset'
+      onClick={handleCancel}>
+        <Cancel
+          className='w-4 h-4 pointer-events-none fill-transparent
+          group-hover:fill-red-500/30 dark:group-hover:fill-red-500/40'
+        />
+      </button>
+
+      <button
+      className='w-10 h-10 flex items-center justify-center rounded-full aspect-square bg-transparent hover:shadow duration-500
+      hover:bg-emerald-700/10 dark:hover:bg-slate-600'
+      id={id.toString()}
+      type='submit'>
+        <OK
+          className='w-6 h-6 pointer-events-none fill-transparent
+          group-hover:fill-green-500/50 dark:group-hover:fill-green-500/40'
+        />
+      </button>
+    </form>
   );
 
   const showText = (): JSX.Element => (
@@ -110,7 +150,7 @@ const TaskItem = (props: ITaskItemProps): JSX.Element => {
         </button>
       )}
 
-      <button
+      {editMode || (<button
         className='w-10 h-10 flex items-center justify-center rounded-full aspect-square bg-transparent hover:shadow duration-500
         hover:bg-emerald-700/10 dark:hover:bg-slate-600'
         id={id.toString()}
@@ -120,7 +160,7 @@ const TaskItem = (props: ITaskItemProps): JSX.Element => {
           className='w-6 h-6 pointer-events-none fill-transparent
           group-hover:fill-violet-900/20 dark:group-hover:fill-slate-500'
         />
-      </button>
+      </button>)}
     </li>
   );
 };

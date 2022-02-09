@@ -863,6 +863,12 @@ Ensure the default browser behavior of the `hidden` attribute.
 .group:hover .group-hover\:fill-red-400 {
   fill: #f87171;
 }
+.group:hover .group-hover\:fill-red-500\/30 {
+  fill: rgb(239 68 68 / 0.3);
+}
+.group:hover .group-hover\:fill-green-500\/50 {
+  fill: rgb(34 197 94 / 0.5);
+}
 .group:hover .group-hover\:fill-violet-900\/20 {
   fill: rgb(76 29 149 / 0.2);
 }
@@ -994,6 +1000,12 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .dark .group:hover .dark\:group-hover\:fill-red-400\/50 {
   fill: rgb(248 113 113 / 0.5);
+}
+.dark .group:hover .dark\:group-hover\:fill-red-500\/40 {
+  fill: rgb(239 68 68 / 0.4);
+}
+.dark .group:hover .dark\:group-hover\:fill-green-500\/40 {
+  fill: rgb(34 197 94 / 0.4);
 }
 .dark .group:hover .dark\:group-hover\:fill-slate-500 {
   fill: #64748b;

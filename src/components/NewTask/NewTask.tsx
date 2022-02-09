@@ -1,5 +1,7 @@
 import { observer } from 'mobx-react';
-import React, { ChangeEvent, KeyboardEvent, useContext } from 'react';
+import React, {
+  ChangeEvent, FormEvent, KeyboardEvent, useContext,
+} from 'react';
 import { ReactComponent as PlusSign } from '../../assets/plus.svg';
 import StoreContext from '../../store/StoreContext';
 
@@ -28,30 +30,40 @@ const NewTask = (): JSX.Element => {
   const handleLostFocus = (e: ChangeEvent<HTMLInputElement>): void => {
     uiStore.setErrorMessage('');
   };
+
+  const addTask = (newTaskText:string):void => {
+    // todo заменить на uuid
+    const id = Math.max(...tasksStore.getTasks.map((task) => task.id)) + 1;
+    const isDone = false;
+    const newTask = { id, text: newTaskText, isDone };
+
+    tasksStore.addTasks([newTask]);
+    uiStore.setErrorMessage('');
+    uiStore.setPendingTaskContent('');
+  };
+
   const handleKeyPress = (e: KeyboardEvent<HTMLInputElement>): void => {
-    const { value: newTaskText } = e.target as HTMLInputElement;
+    if ((e.code === 'Enter') && !tasksStore.getValidateErrors(uiStore.getPendingTaskContent)) {
+      addTask(uiStore.getPendingTaskContent);
+    }
+  };
 
-    if ((e.code === 'Enter') && !tasksStore.getValidateErrors(newTaskText)) {
-      // todo заменить на uuid
-      const id = Math.max(...tasksStore.getTasks.map((task) => task.id)) + 1;
-      const isDone = false;
-      const newTask = { id, text: newTaskText, isDone };
-
-      tasksStore.addTasks([newTask]);
-      uiStore.setErrorMessage('');
-      uiStore.setPendingTaskContent('');
+  const handleSubmit = (e: FormEvent<HTMLFormElement>):void => {
+    e.preventDefault();
+    const error = tasksStore.getValidateErrors(uiStore.getPendingTaskContent);
+    uiStore.setErrorMessage(error);
+    if (!tasksStore.getValidateErrors(uiStore.getPendingTaskContent)) {
+      addTask(uiStore.getPendingTaskContent);
     }
   };
 
   return (
-    <>
+    <form onSubmit={handleSubmit}>
       <div className='w-full px-6 pt-6 pb-1 bg-slate-100 dark:bg-slate-700 duration-500'>
-        <div className='
-          flex group items-center rounded-full duration-500
+        <div className='flex group items-center rounded-full duration-500
           bg-white
           dark:bg-gray-500 dark:hover:ring-emerald-900 dark:ring-emerald-900
-          hover:ring-2 hover:ring-emerald-700/50 focus-within:ring-2 ring-emerald-700/50
-        '>
+          hover:ring-2 hover:ring-emerald-700/50 focus-within:ring-2 ring-emerald-700/50'>
           <div className='flex-auto bg-transparent'>
             <input
               type='input'
@@ -59,8 +71,7 @@ const NewTask = (): JSX.Element => {
                 text-xl h-8
                 md:text-2xl md:h-12
                 text-gray-400 placeholder-gray-200
-                dark:text-gray-300 dark:placeholder-gray-400
-              '
+                dark:text-gray-300 dark:placeholder-gray-400'
               autoFocus
               autoComplete='off'
               placeholder='Add some tasks'
@@ -71,25 +82,23 @@ const NewTask = (): JSX.Element => {
               value={uiStore.getPendingTaskContent}
             />
           </div>
+
           <button
-            type='button'
+            type='submit'
             className='flex items-center justify-center  bg-transparent rounded-full duration-500
               hover:bg-slate-300 hover:scale-110
               dark:hover:bg-slate-800
               h-6 w-6 mr-1
-              md:h-12 md:w-12 md:mr-0
-            '>
+              md:h-12 md:w-12 md:mr-0'>
             <PlusSign
-              className='
-                w-8 h-8 fill-transparent duration-500
+              className='w-8 h-8 fill-transparent duration-500
                 group-focus-within:fill-emerald-700/70 group-hover:fill-emerald-700/70
-                dark:group-focus-within:fill-emerald-700 dark:group-hover:fill-emerald-700
-              '
+                dark:group-focus-within:fill-emerald-700 dark:group-hover:fill-emerald-700'
             />
           </button>
         </div>
       </div>
-    </>
+    </form>
   );
 };
 
