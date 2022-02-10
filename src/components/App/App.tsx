@@ -1,7 +1,7 @@
 import cn from 'classnames';
 import { observer } from 'mobx-react';
 import React, { FC, useContext } from 'react';
-import { Route, Routes, useLocation } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { AboutPage, MainPage, NotFoundPage } from '../../pages/pages';
 import { routePaths } from '../../routes/routes';
 import StoreContext from '../../store/StoreContext';
