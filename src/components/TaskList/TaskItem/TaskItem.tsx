@@ -2,10 +2,9 @@ import { observer } from 'mobx-react';
 import React, {
   ChangeEvent, FormEvent, KeyboardEvent, MouseEvent, useContext, useState,
 } from 'react';
-import { ReactComponent as Cancel } from '../../../assets/cancel.svg';
-import { ReactComponent as EditMode } from '../../../assets/edit.svg';
-import { ReactComponent as OK } from '../../../assets/ok.svg';
-import { ReactComponent as TrashCan } from '../../../assets/trashcan.svg';
+import {
+  Cancel, Edit, TrashCan, OK,
+} from '../../../assets/assets';
 import StoreContext from '../../../store/StoreContext';
 import { ITask } from '../../../store/TasksStore';
 
@@ -17,7 +16,7 @@ const TaskItem = (props: ITaskItemProps): JSX.Element => {
   const {
     task: { id, text, isDone },
   } = props;
-  const { tasksStore, uiStore } = useContext(StoreContext);
+  const { tasksStore } = useContext(StoreContext);
   const [editMode, setEditMode] = useState(false);
   const [editedTask, setEditedTask] = useState(text);
 
@@ -31,7 +30,6 @@ const TaskItem = (props: ITaskItemProps): JSX.Element => {
     const targetId: number = parseInt((e.target as HTMLInputElement).id, 10);
 
     tasksStore.deleteById(targetId);
-    uiStore.setPendingTaskContent('');
   };
 
   const handleEditMode = (e: MouseEvent<HTMLButtonElement>): void => {
@@ -156,7 +154,7 @@ const TaskItem = (props: ITaskItemProps): JSX.Element => {
         id={id.toString()}
         type='button'
         onClick={handleEditMode}>
-        <EditMode
+        <Edit
           className='w-6 h-6 pointer-events-none fill-transparent
           group-hover:fill-violet-900/20 dark:group-hover:fill-slate-500'
         />

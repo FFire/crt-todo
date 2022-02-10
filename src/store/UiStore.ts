@@ -16,7 +16,6 @@ export enum StateFilterNames {
 export class UiStore {
   rootStore: RootStore;
   private uiTheme: UiThemes = UiThemes.DARK;
-  private pendingTaskContent = '';
   private textFilterContent = '';
   private stateFilerChecked = StateFilterNames.all;
   private errorMesage = '';
@@ -32,14 +31,6 @@ export class UiStore {
 
   get getErrorMessage(): string {
     return this.errorMesage;
-  }
-
-  setPendingTaskContent(value:string):void {
-    this.pendingTaskContent = value;
-  }
-
-  get getPendingTaskContent(): string {
-    return this.pendingTaskContent;
   }
 
   setStateFilter(stateFilterValue: StateFilterNames): void {

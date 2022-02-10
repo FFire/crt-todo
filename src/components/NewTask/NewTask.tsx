@@ -1,8 +1,8 @@
 import { observer } from 'mobx-react';
 import React, {
-  ChangeEvent, FormEvent, KeyboardEvent, useContext,
+  ChangeEvent, FormEvent, KeyboardEvent, useContext, useState,
 } from 'react';
-import { ReactComponent as PlusSign } from '../../assets/plus.svg';
+import { Plus } from '../../assets/assets';
 import StoreContext from '../../store/StoreContext';
 
 export interface INewTaskProps {
@@ -15,13 +15,15 @@ export interface INewTaskProps {
 
 const NewTask = (): JSX.Element => {
   const { uiStore, tasksStore } = useContext(StoreContext);
+  const [newTaskText, setNewTaskText] = useState('');
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
     const { value } = e.target;
     const error = tasksStore.getValidateErrors(value);
     uiStore.setErrorMessage(error);
-    uiStore.setPendingTaskContent(value);
+    setNewTaskText(value);
   };
+
   const handleGetFocus = (e: ChangeEvent<HTMLInputElement>): void => {
     const { value } = e.target;
     const error = tasksStore.getValidateErrors(value);
@@ -31,29 +33,29 @@ const NewTask = (): JSX.Element => {
     uiStore.setErrorMessage('');
   };
 
-  const addTask = (newTaskText:string):void => {
+  const addTask = (text:string):void => {
     // todo заменить на uuid
     const id = Math.max(...tasksStore.getTasks.map((task) => task.id)) + 1;
     const isDone = false;
-    const newTask = { id, text: newTaskText, isDone };
+    const newTask = { id, text, isDone };
 
     tasksStore.addTasks([newTask]);
     uiStore.setErrorMessage('');
-    uiStore.setPendingTaskContent('');
+    setNewTaskText('');
   };
 
   const handleKeyPress = (e: KeyboardEvent<HTMLInputElement>): void => {
-    if ((e.code === 'Enter') && !tasksStore.getValidateErrors(uiStore.getPendingTaskContent)) {
-      addTask(uiStore.getPendingTaskContent);
+    if ((e.code === 'Enter') && !tasksStore.getValidateErrors(newTaskText)) {
+      addTask(newTaskText);
     }
   };
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>):void => {
     e.preventDefault();
-    const error = tasksStore.getValidateErrors(uiStore.getPendingTaskContent);
+    const error = tasksStore.getValidateErrors(newTaskText);
     uiStore.setErrorMessage(error);
-    if (!tasksStore.getValidateErrors(uiStore.getPendingTaskContent)) {
-      addTask(uiStore.getPendingTaskContent);
+    if (!tasksStore.getValidateErrors(newTaskText)) {
+      addTask(newTaskText);
     }
   };
 
@@ -79,7 +81,7 @@ const NewTask = (): JSX.Element => {
               onChange={handleChange}
               onFocus={handleGetFocus}
               onBlur={handleLostFocus}
-              value={uiStore.getPendingTaskContent}
+              value={newTaskText}
             />
           </div>
 
@@ -90,7 +92,7 @@ const NewTask = (): JSX.Element => {
               dark:hover:bg-slate-800
               h-6 w-6 mr-1
               md:h-12 md:w-12 md:mr-0'>
-            <PlusSign
+            <Plus
               className='w-8 h-8 fill-transparent duration-500
                 group-focus-within:fill-emerald-700/70 group-hover:fill-emerald-700/70
                 dark:group-focus-within:fill-emerald-700 dark:group-hover:fill-emerald-700'
