@@ -743,6 +743,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .text-gray-900\/30 {
   color: rgb(17 24 39 / 0.3);
 }
+.text-gray-900\/70 {
+  color: rgb(17 24 39 / 0.7);
+}
 .text-gray-600 {
   --tw-text-opacity: 1;
   color: rgb(75 85 99 / var(--tw-text-opacity));
@@ -932,6 +935,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .dark .dark\:text-gray-200\/40 {
   color: rgb(229 231 235 / 0.4);
 }
+.dark .dark\:text-gray-100\/70 {
+  color: rgb(243 244 246 / 0.7);
+}
 .dark .dark\:text-slate-300 {
   --tw-text-opacity: 1;
   color: rgb(203 213 225 / var(--tw-text-opacity));
@@ -976,6 +982,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .dark .dark\:hover\:text-gray-200\/70:hover {
   color: rgb(229 231 235 / 0.7);
+}
+.dark .dark\:hover\:text-gray-100\/70:hover {
+  color: rgb(243 244 246 / 0.7);
 }
 .dark .dark\:hover\:accent-slate-400:hover {
   accent-color: #94a3b8;

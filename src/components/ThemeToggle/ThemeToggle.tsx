@@ -1,11 +1,11 @@
 import { observer } from 'mobx-react';
-import { ChangeEvent, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { ChangeEvent, FC, useContext } from 'react';
+import { NavLink } from 'react-router-dom';
 import { routePaths } from '../../routes/routes';
 import StoreContext from '../../store/StoreContext';
 import { UiThemes } from '../../store/UiStore';
 
-const ThemeToggle = (): JSX.Element => {
+const ThemeToggle: FC = () => {
   const { uiStore } = useContext(StoreContext);
 
   const handleThemeToggle = (e: ChangeEvent<HTMLInputElement>): void => {
@@ -44,23 +44,21 @@ const ThemeToggle = (): JSX.Element => {
 
         <div className='pr-10 space-x-4 duration-500'>
 
-          <Link className='
-          text-gray-900/30 hover:text-gray-900/70
-          dark:text-gray-200/40 dark:hover:text-gray-200/70
-          '
+          <NavLink
+          className={({ isActive }):string => `text-gray-900/30 hover:text-gray-900/70
+          dark:text-gray-200/40 dark:hover:text-gray-100/70 ${isActive ? 'dark:text-gray-100/70 text-gray-900/70' : ''}`}
           to={routePaths.HOME.path}
           >
             {routePaths.HOME.name}
-          </Link>
+          </NavLink>
 
-          <Link className='
-          text-gray-900/30 hover:text-gray-900/70
-          dark:text-gray-200/40 dark:hover:text-gray-200/70
-          '
+          <NavLink
+          className={({ isActive }):string => `text-gray-900/30 hover:text-gray-900/70
+          dark:text-gray-200/40 dark:hover:text-gray-100/70 ${isActive ? 'dark:text-gray-100/70 text-gray-900/70' : ''}`}
           to={routePaths.ABOUT.path}
           >
             {routePaths.ABOUT.name}
-          </Link>
+          </NavLink>
 
         </div>
 
