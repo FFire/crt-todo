@@ -5,7 +5,7 @@
 
 ### 🙋‍♂ Alexandr Belan <img src="https://4.bp.blogspot.com/-IUDvPAuE9Rg/XE9Muo_8D-I/AAAAAAAAHdE/vDGQsIXh4GM8qdInx9AHPq984Q9P4BEQgCK4BGAYYCw/s640/Icon-Telegram.png" alt="drawing" width="24"/>️ [overstar](https://t.me/overstar)
 ### CRA TO DO
-Try online [version](https://cra-todo.vercel.app/)
+Try online web [version](https://cra-todo.vercel.app/)
 
 It has some features:
 - Add task
