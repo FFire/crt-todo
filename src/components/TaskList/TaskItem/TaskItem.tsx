@@ -131,6 +131,8 @@ const TaskItem = (props: ITaskItemProps): JSX.Element => {
         md:h-8 md:w-8 md:mx-1 md:my-3'
           type='checkbox'
           id={`checkbox-${id.toString()}`}
+          aria-label='Check this task as done'
+          title='Check this task as done'
           defaultChecked={isDone}
           onChange={handleToggle}
         />
