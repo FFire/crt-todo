@@ -350,13 +350,13 @@ Ensure the default browser behavior of the `hidden` attribute.
 .relative {
   position: relative;
 }
-.mx-auto {
-  margin-left: auto;
-  margin-right: auto;
-}
 .mx-2 {
   margin-left: 0.5rem;
   margin-right: 0.5rem;
+}
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
 }
 .my-4 {
   margin-top: 1rem;
@@ -369,6 +369,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .my-2 {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
+}
+.mr-2 {
+  margin-right: 0.5rem;
 }
 .mt-3 {
   margin-top: 0.75rem;
@@ -402,6 +405,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .aspect-square {
   aspect-ratio: 1 / 1;
+}
+.h-5 {
+  height: 1.25rem;
 }
 .h-4 {
   height: 1rem;
@@ -465,6 +471,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .w-11\/12 {
   width: 91.666667%;
+}
+.w-5 {
+  width: 1.25rem;
 }
 .w-full {
   width: 100%;
@@ -617,6 +626,12 @@ Ensure the default browser behavior of the `hidden` attribute.
   -webkit-background-clip: text;
           background-clip: text;
 }
+.fill-black {
+  fill: #000;
+}
+.fill-sky-500 {
+  fill: #0ea5e9;
+}
 .fill-transparent {
   fill: transparent;
 }
@@ -721,9 +736,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .font-extrabold {
   font-weight: 800;
 }
-.text-slate-700 {
+.text-slate-400 {
   --tw-text-opacity: 1;
-  color: rgb(51 65 85 / var(--tw-text-opacity));
+  color: rgb(148 163 184 / var(--tw-text-opacity));
 }
 .text-transparent {
   color: transparent;
@@ -735,6 +750,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 .text-gray-400 {
   --tw-text-opacity: 1;
   color: rgb(156 163 175 / var(--tw-text-opacity));
+}
+.text-slate-700 {
+  --tw-text-opacity: 1;
+  color: rgb(51 65 85 / var(--tw-text-opacity));
 }
 .text-slate-500 {
   --tw-text-opacity: 1;
@@ -749,6 +768,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .text-gray-600 {
   --tw-text-opacity: 1;
   color: rgb(75 85 99 / var(--tw-text-opacity));
+}
+.underline {
+  text-decoration-line: underline;
 }
 .placeholder-gray-200::placeholder {
   --tw-placeholder-opacity: 1;
@@ -826,6 +848,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .hover\:to-emerald-700\/10:hover {
   --tw-gradient-to: rgb(4 120 87 / 0.1);
+}
+.hover\:text-black:hover {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity));
 }
 .hover\:text-gray-900\/70:hover {
   color: rgb(17 24 39 / 0.7);
@@ -917,16 +943,23 @@ Ensure the default browser behavior of the `hidden` attribute.
 .dark .dark\:to-zinc-500 {
   --tw-gradient-to: #71717a;
 }
+.dark .dark\:fill-white {
+  fill: #fff;
+}
 .dark .dark\:fill-slate-500 {
   fill: #64748b;
 }
-.dark .dark\:text-slate-100 {
+.dark .dark\:text-slate-300 {
   --tw-text-opacity: 1;
-  color: rgb(241 245 249 / var(--tw-text-opacity));
+  color: rgb(203 213 225 / var(--tw-text-opacity));
 }
 .dark .dark\:text-gray-300 {
   --tw-text-opacity: 1;
   color: rgb(209 213 219 / var(--tw-text-opacity));
+}
+.dark .dark\:text-slate-100 {
+  --tw-text-opacity: 1;
+  color: rgb(241 245 249 / var(--tw-text-opacity));
 }
 .dark .dark\:text-slate-400 {
   --tw-text-opacity: 1;
@@ -937,10 +970,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .dark .dark\:text-gray-100\/70 {
   color: rgb(243 244 246 / 0.7);
-}
-.dark .dark\:text-slate-300 {
-  --tw-text-opacity: 1;
-  color: rgb(203 213 225 / var(--tw-text-opacity));
 }
 .dark .dark\:text-gray-50 {
   --tw-text-opacity: 1;
@@ -979,6 +1008,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .dark .dark\:hover\:to-emerald-900\/60:hover {
   --tw-gradient-to: rgb(6 78 59 / 0.6);
+}
+.dark .dark\:hover\:text-white:hover {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 .dark .dark\:hover\:text-gray-200\/70:hover {
   color: rgb(229 231 235 / 0.7);
