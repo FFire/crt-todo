@@ -82,6 +82,8 @@ const TaskItem = (props: ITaskItemProps): JSX.Element => {
       className='w-10 h-10 flex items-center justify-center rounded-full aspect-square bg-transparent hover:shadow duration-500
       hover:bg-emerald-700/10 dark:hover:bg-slate-600'
       id={id.toString()}
+      aria-label='Cancel changes'
+      title='Cancel changes'
       type='reset'
       onClick={handleCancel}>
         <Cancel
@@ -94,6 +96,8 @@ const TaskItem = (props: ITaskItemProps): JSX.Element => {
       className='w-10 h-10 flex items-center justify-center rounded-full aspect-square bg-transparent hover:shadow duration-500
       hover:bg-emerald-700/10 dark:hover:bg-slate-600'
       id={id.toString()}
+      aria-label='Save changes'
+      title='Save changes'
       type='submit'>
         <OK
           className='w-6 h-6 pointer-events-none fill-transparent
@@ -126,7 +130,7 @@ const TaskItem = (props: ITaskItemProps): JSX.Element => {
         sm:h-6 sm:w-6
         md:h-8 md:w-8 md:mx-1 md:my-3'
           type='checkbox'
-          id={id.toString()}
+          id={`checkbox-${id.toString()}`}
           defaultChecked={isDone}
           onChange={handleToggle}
         />
@@ -138,7 +142,9 @@ const TaskItem = (props: ITaskItemProps): JSX.Element => {
         <button
           className='w-10 h-10 flex items-center justify-center rounded-full aspect-square bg-transparent hover:shadow duration-500
         hover:bg-emerald-700/10 dark:hover:bg-slate-600'
-          id={id.toString()}
+          id={`delete-${id.toString()}`}
+          aria-label='Delete this task'
+          title='Delete this task'
           type='button'
           onClick={handleDeleteById}>
           <TrashCan
@@ -151,7 +157,9 @@ const TaskItem = (props: ITaskItemProps): JSX.Element => {
       {editMode || (<button
         className='w-10 h-10 flex items-center justify-center rounded-full aspect-square bg-transparent hover:shadow duration-500
         hover:bg-emerald-700/10 dark:hover:bg-slate-600'
-        id={id.toString()}
+        id={`edit-${id.toString()}`}
+        aria-label='Edit this task'
+        title='Edit this task'
         type='button'
         onClick={handleEditMode}>
         <Edit

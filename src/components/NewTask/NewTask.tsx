@@ -87,6 +87,8 @@ const NewTask = (): JSX.Element => {
 
           <button
             type='submit'
+            aria-label='Add task to list'
+            title='Add task to list'
             className='flex items-center justify-center  bg-transparent rounded-full duration-500
               hover:bg-slate-300 hover:scale-110
               dark:hover:bg-slate-800
